@@ -1,8 +1,9 @@
+import { Typography } from '@mui/material';
 
 export const PrincipalPage = () => {
   return (
     <>
-        <h1>PrincipalPage</h1>
+      <Typography variant='h1'>PrincipalPage</Typography>
     </>
-  )
+  );
 }
