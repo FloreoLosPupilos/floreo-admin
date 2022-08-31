@@ -1,21 +1,17 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore/lite'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore/lite";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyA6IfBOvTdWHXulFb6l0MufpZKASMl9_Es",
-  authDomain: "proyecto-floreo.firebaseapp.com",
-  projectId: "proyecto-floreo",
-  storageBucket: "proyecto-floreo.appspot.com",
-  messagingSenderId: "214939621324",
-  appId: "1:214939621324:web:c0805bf00326385504af69"
+  apiKey: "AIzaSyDinKKbR-KmaMMyPEW9v4XBYLSoXlQqjBU",
+  authDomain: "react-curso-7adc1.firebaseapp.com",
+  projectId: "react-curso-7adc1",
+  storageBucket: "react-curso-7adc1.appspot.com",
+  messagingSenderId: "980160785250",
+  appId: "1:980160785250:web:34ed963de0996d43505a3b"
 };
 
-// Initialize Firebase
-export const FirebaseApp = initializeApp(firebaseConfig);
-export const FirebaseAuth = getAuth(FirebaseApp);   // es para realizar la autenticacion
-export const FirebaseDB = getFirestore(FirebaseApp); //base de datos
+export const FirebaseApp  = initializeApp(firebaseConfig);
+export const FirebaseAuth = getAuth(FirebaseApp);
+export const FirebaseDB   = getFirestore(FirebaseApp);
