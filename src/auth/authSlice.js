@@ -4,6 +4,8 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     status: 'not-authenticated',
+    email: '',
+    uid: '',
     errorMessage: ''
   },
   reducers: {
