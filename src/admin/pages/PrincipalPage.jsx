@@ -1,9 +1,12 @@
-import { Typography } from '@mui/material';
+import { NavBar } from "../ui/Navbar";
+
 
 export const PrincipalPage = () => {
   return (
     <>
-      <Typography variant='h1'>PrincipalPage</Typography>
+      {/* <NavBar /> */}
+      <h1>Hola aqui van usuarios</h1>
+      {/* Usuarios */}
     </>
   );
 }
