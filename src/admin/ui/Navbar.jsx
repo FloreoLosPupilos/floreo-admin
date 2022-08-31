@@ -13,9 +13,11 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../auth';
 
 const pages = ['about', 'carrousel', 'blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard'];
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,6 +37,11 @@ export const NavBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch( startLogout() );
+  }
 
   return (
     <AppBar position="static">
@@ -149,7 +156,7 @@ export const NavBar = () => {
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
-              }}
+            }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
@@ -158,6 +165,9 @@ export const NavBar = () => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
+              <MenuItem key={'Logout'} onClick={onLogout}>
+                  <Typography textAlign="center">{'Logout'}</Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
