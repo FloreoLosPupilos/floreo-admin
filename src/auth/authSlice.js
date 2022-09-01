@@ -14,10 +14,10 @@ export const authSlice = createSlice({
       state.email       = payload.email,
       state.uid         = payload.uid
     },
-    logout: (state, { payload }) => {
+    logout: (state) => {
       state.status = 'not-authenticated';
-      state.email       = payload.email,
-      state.uid         = payload.uid
+      state.email       = null,
+      state.uid         = null
     },
     checkingCredentials: (state) => {
       state.status = 'checking';
