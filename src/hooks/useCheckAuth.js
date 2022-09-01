@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { FirebaseAuth } from '../firebase/config';
 import { onAuthStateChanged } from '@firebase/auth';
 import { login, logout } from '../auth';
+import { startLoadingImages } from '../store/carrousel';
 
 export const useCheckAuth = () => {
   const { status } = useSelector(state => state.auth);
@@ -11,9 +12,11 @@ export const useCheckAuth = () => {
   useEffect(() => {
     onAuthStateChanged(FirebaseAuth, async(user) => {
       if(!user) return dispatch(logout());
+      
       const { displayName, email, uid } = user;
-      dispatch(login({displayName, email, uid}));
+      dispatch( login({displayName, email, uid}) );
+      dispatch( startLoadingImages() );
     });
-  });
+  }, []);
   return status;
 };
