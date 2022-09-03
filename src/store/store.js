@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authSlice } from '../auth';
-import { carrouselSlice } from './carrousel';
+import { carruselSlice } from './carrusel';
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
-    carrousel: carrouselSlice.reducer
+    carrusel: carruselSlice.reducer
   }
 });

@@ -1,1 +1,2 @@
-export * from './loadImages';
+export * from './fileUpload';
+export * from './loadingImages';
