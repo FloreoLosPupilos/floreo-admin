@@ -13,6 +13,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 export const ImageView = () => {
     
     const [file, setFile] = useState(null);
+    const [path, setPath] = useState(null)
     const fileInputRef = useRef();
 
     const dispatch = useDispatch();
@@ -26,10 +27,12 @@ export const ImageView = () => {
 
     const fileToFirebase = async(e) => {
         e.preventDefault();
-        const url = await fileUpload(file);
+        const [pathStorage, url] = await fileUpload(file);     
+        setPath(pathStorage);  
         dispatch( startNewImage(url) );
         Swal.fire('Imagen guardada', 'Se guardo correctamente la imagen', 'success');
     };
+
 
     return (
         <>
@@ -70,7 +73,8 @@ export const ImageView = () => {
             <Grid container direction='row' alignItems='center' justifyContent='center' sx={{ ml: '20px' }}>
                 
                 <ImageGallery 
-                    images={ images } 
+                    images={ images }
+                    path={path}
                 />
             </Grid>
         

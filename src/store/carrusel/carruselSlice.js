@@ -21,13 +21,23 @@ export const carruselSlice = createSlice({
         setImages: (state, action) => {
             state.images = action.payload;            
         },
+
+        clearImagesLogout: (state) => {
+            state.isSaving = false;
+            state.images = []
+        },
+
+        deleteImage: (state, action) => {
+            state.images = state.images.filter( img => img.id !== action.payload );
+        }
     }
 })
 
 export const { 
 
     addNewImage, 
+    clearImagesLogout,
+    deleteImage,
     savingNewImage, 
     setImages, 
-
 } = carruselSlice.actions;

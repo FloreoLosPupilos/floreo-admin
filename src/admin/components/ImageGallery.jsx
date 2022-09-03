@@ -1,15 +1,25 @@
 import { Delete } from '@mui/icons-material';
-import {IconButton, ImageList, ImageListItem, ImageListItemBar } from '@mui/material';
+import { IconButton, ImageList, ImageListItem, ImageListItemBar,} from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { deleteImage } from '../../helpers';
+import { deleteImageFromCloudStorage } from '../../store/carrusel/thunks';
 
-export const ImageGallery = ({ images }) => {
 
-  images.map( img => console.log(img.url))
-  
+export const ImageGallery = ({ images, path}) => {
+
+  const dispatch = useDispatch();
+
+  const onDelete = async(image) => {
+    deleteImage(path);
+    dispatch(deleteImageFromCloudStorage(image));
+  }
+
   return (
   
     <ImageList sx={{ width: 700, height: 400, mr: 10, justifyContent: 'center' }} className='full-height' >
 
       {images.map((image) => (
+        
         <ImageListItem key={image.id}>
           <img
             src={`${image.url}?w=250&fit=crop&auto=format`}
@@ -19,9 +29,11 @@ export const ImageGallery = ({ images }) => {
           />
 
           <ImageListItemBar
+            title={image.id}
             actionIcon={
               <IconButton
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                color="error"
+                onClick={() => onDelete(image.id)}
               >
                 <Delete />
               </IconButton>

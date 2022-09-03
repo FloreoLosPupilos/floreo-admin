@@ -1,6 +1,7 @@
-import { loginEmailPassword, logoutFirebase, signInWithGoogle,  } from "../firebase/providers";
-import { checkingCredentials } from "./";
-import { login, logout } from "./authSlice";
+import { loginEmailPassword, logoutFirebase, signInWithGoogle,  } from '../firebase/providers';
+import { clearImagesLogout } from '../store/carrusel';
+import { checkingCredentials } from './';
+import { login, logout } from './authSlice';
 
 export const checkingAuthentication = (email, password) => {
   return async (dispatch) => {
@@ -28,6 +29,7 @@ export const startLoginWithEmailPassword = ({ email, password }) => {
 export const startLogout = () => {
   return async (dispatch) => {
     await logoutFirebase();
+    dispatch(clearImagesLogout());
     dispatch(logout({}));
   }
 }
