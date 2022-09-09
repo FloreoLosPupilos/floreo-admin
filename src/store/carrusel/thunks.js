@@ -13,13 +13,14 @@ export const startLoadingImages = () => {
 };
 
 
-export const startNewImage = ( url ) => {
+export const startNewImage = ( url, nameImage) => {
     return async(dispatch) => {
 
         dispatch(savingNewImage());
         
         const newImage = {
             url: url,
+            name: nameImage
         };
 
 
@@ -36,9 +37,10 @@ export const startNewImage = ( url ) => {
 export const deleteImageFromCloudStorage = (imageID) => {
     return async(dispatch ) => {
         
+        
         const docRef = doc(FirebaseDB, 'carrusel', imageID);
         deleteDoc(docRef).then(() => {
-            console.log("Entire Document has been deleted successfully.")
+            // console.log("Entire Document has been deleted successfully.")
         }).catch(error => {
             console.log(error);
         });   

@@ -1,5 +1,5 @@
-import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { storage } from '../firebase/config'
+import { deleteObject, getDownloadURL, listAll, ref, uploadBytes } from 'firebase/storage'
+import {  storage } from '../firebase/config'
 import { v4 } from 'uuid';
 
 export const fileUpload = async( file ) => {
@@ -12,13 +12,11 @@ export const fileUpload = async( file ) => {
 
 
 export const deleteImage = async(imageName) => {
-
     const storageRef = ref(storage, `carrusel/${imageName}`);
     console.log(storageRef);
-    deleteObject(storageRef).then( () => {
-        console.log("elimnado");
-    }).catch((error) => {
+    deleteObject(storageRef).then().catch((error) => {
         console.log(error);
     })
 
 };
+

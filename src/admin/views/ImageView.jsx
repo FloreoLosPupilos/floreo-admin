@@ -1,10 +1,8 @@
-import { Button, Grid, IconButton } from '@mui/material';
-import { SaveOutlined } from '@mui/icons-material';
+import { Grid, IconButton } from '@mui/material';
 import { ImageGallery } from '../components';
 import { UploadOutlined } from '@mui/icons-material';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { fileUpload } from '../../helpers/fileUpload';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startNewImage } from '../../store/carrusel/thunks';
 import Swal from 'sweetalert2';
@@ -12,27 +10,19 @@ import 'sweetalert2/dist/sweetalert2.css';
 
 export const ImageView = () => {
     
-    const [file, setFile] = useState(null);
-    const [path, setPath] = useState(null)
     const fileInputRef = useRef();
 
     const dispatch = useDispatch();
     const { isSaving, images } = useSelector( state => state.carrusel );
 
 
-    const onFileInputChange = (e) => {
-        e.preventDefault();
-        setFile(e.target.files[0]);
-    };   
-
-    const fileToFirebase = async(e) => {
-        e.preventDefault();
-        const [pathStorage, url] = await fileUpload(file);     
-        setPath(pathStorage);  
-        dispatch( startNewImage(url) );
+    const onFileInputChange = async({target}) => {
+        if (target.files === 0) return;
+        const [pathStorage, url] = await fileUpload(target.files[0]);  
+        dispatch( startNewImage(url, pathStorage) );
         Swal.fire('Imagen guardada', 'Se guardo correctamente la imagen', 'success');
-    };
 
+    };   
 
     return (
         <>
@@ -45,7 +35,6 @@ export const ImageView = () => {
                 
                 <input 
                     type='file'
-                    multiple
                     ref={ fileInputRef }
                     onChange={ onFileInputChange }
                     style={{ display: 'none' }}
@@ -54,27 +43,16 @@ export const ImageView = () => {
                 <IconButton
                     color="primary"
                     disabled={ isSaving }
-                    onClick={ () => fileInputRef.current.click() }
+                    onClick={ () => fileInputRef.current.click()}
                 >
                     <UploadOutlined />
                 </IconButton>
-
-                <Grid item>
-                    <Button color="primary" sx={{ padding: 2 }} 
-                            onClick={fileToFirebase} 
-                            disabled={ isSaving }
-                    >
-                        <SaveOutlined sx={{ fontSize: 30}}/>
-                        Guardar
-                    </Button>
-                </Grid>
             </Grid>
 
             <Grid container direction='row' alignItems='center' justifyContent='center' sx={{ ml: '20px' }}>
                 
                 <ImageGallery 
                     images={ images }
-                    path={path}
                 />
             </Grid>
         
