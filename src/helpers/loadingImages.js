@@ -17,8 +17,5 @@ export const loadingImages = async() => {
         });
     });
 
-    console.log(images);
-
     return images;
-
 }
