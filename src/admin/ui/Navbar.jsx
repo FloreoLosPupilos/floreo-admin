@@ -16,27 +16,17 @@ import { startLogout } from '../../auth';
 import { Avatar, Tooltip } from '@mui/material';
 
 const pages = ['about', 'carrousel', 'blog'];
-const settings = ['Profile', 'Account', 'Dashboard'];
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     event.preventDefault();
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    event.preventDefault();
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   const dispatch = useDispatch();

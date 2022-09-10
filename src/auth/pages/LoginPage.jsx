@@ -5,13 +5,15 @@ import { useForm } from "../../hooks";
 import { startGoogleSignIn } from "../thunks";
 import { startLoginWithEmailPassword } from "..";
 
+const formData = {
+  email: '',
+  password: ''
+};
+
 export const LoginPage = () => {
   const dispatch = useDispatch();
 
-  const {email, password, onInputChange} = useForm({
-    email: '',
-    password: ''
-  })
+  const {email, password, onInputChange} = useForm(formData)
 
   const onSubmit = ( event ) => {
     event.preventDefault();
