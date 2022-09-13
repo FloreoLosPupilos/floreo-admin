@@ -10,10 +10,18 @@ export const checkingAuthentication = (email, password) => {
 }
 
 export const startGoogleSignIn = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(checkingCredentials());
-    const resp = await signInWithGoogle();
-    dispatch(login(resp));
+    const validEmailUid = getState().validEmail.uid
+    const result = await signInWithGoogle();
+    if (validEmailUid !== result.uid) {
+      result.errorMessage = 'Correo electrónico no autorizado'
+      result.ok = false;
+      await logoutFirebase();
+    }
+
+    if (!result.ok) return dispatch(logout({ errorMessage: result.errorMessage }));
+
   }
 }
 

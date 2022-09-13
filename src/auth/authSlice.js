@@ -10,14 +10,16 @@ export const authSlice = createSlice({
   },
   reducers: {
     login: (state, { payload }) => {
-      state.status      = 'authenticated';
-      state.email       = payload.email,
-      state.uid         = payload.uid
+      state.status       = 'authenticated';
+      state.email        = payload.email,
+      state.uid          = payload.uid
+      state.errorMessage = null
     },
-    logout: (state) => {
+    logout: (state, { payload }) => {
       state.status = 'not-authenticated';
-      state.email       = null,
-      state.uid         = null
+      state.email        = null,
+      state.uid          = null,
+      state.errorMessage = payload?.errorMessage
     },
     checkingCredentials: (state) => {
       state.status = 'checking';
