@@ -1,7 +1,9 @@
+import {Tabla} from "../components/tabla/tabla";
+
 export const CategoryView = () => {
   return (
     <>
-      Hello Category View
+    <Tabla collection="Integrantes"/>
     </>
   );
 }
