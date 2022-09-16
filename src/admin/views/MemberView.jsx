@@ -1,7 +1,9 @@
+import {Tabla} from "../components/tabla/tabla";
+
 export const MemberView = () => {
   return (
     <>
-      Hello Member View
+      <Tabla collection="Integrantes" subCollectio={false}/>
     </>
   );
 }
