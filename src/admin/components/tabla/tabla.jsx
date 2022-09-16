@@ -51,13 +51,15 @@ function CarsFilter({ globalFilter, setGlobalFilter }) {
 }
 
 //Asignar los valores que va a tener la columna dependiedo de la colleccion que se pida.
-function getColumsData(collection) {
-  if (collection == "Categorias") {
+function getColumsData(collection, subcollection) {
+  if (subcollection) {
+    return (useColumnsServices());
+  } else if (collection == "Categorias") {
     return (useColumnsCategories());
-  } else if (collection == "Servicios") {
-    return (0);
   } else if (collection == "Integrantes") {
     return (useColumnsMembers());
+  } else if (collection == "Suscriptores") {
+    return (useColumnsSubcribers());
   } else {
     return ("Error");
   }
@@ -67,10 +69,10 @@ function getColumsData(collection) {
 //Componente Tabla
 export const Tabla = (props) => {
   //Constante con la coleccion solicitada.
-  const collections = GetCollectionData({ collection: props.collection });
-  
+  const collections = GetCollectionData({collection: props.collection},props.subCollection);
+
   //Columnas
-  const columns = getColumsData(props.collection);
+  const columns = getColumsData(props.collection, props.subCollection);
 
 
   //Datos de las filas
@@ -114,7 +116,7 @@ export const Tabla = (props) => {
 
   return (
     <div className="container">
-      <button style={{ height: "20px", width: "20%", marginBottom: "4px", marginLeft: "80%" }}>Agregar</button>
+      <button style={{ height: "20px", width: "20%", marginBottom: "4px", marginLeft: "80%" }}>Agregar {}</button>
       <table {...getTableProps()}>
         <thead>
           <tr>
@@ -191,7 +193,7 @@ export const Tabla = (props) => {
         </span>
         <div>
           <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {"<<"}
+            {"<<"}
           </button>{" "}
           <button onClick={() => previousPage()} disabled={!canPreviousPage}>
             Atras
@@ -199,8 +201,8 @@ export const Tabla = (props) => {
           <button onClick={() => nextPage()} disabled={!canNextPage}>
             Siguiente
           </button>{" "}
-          <button onClick={() => gotoPage(pageCount - 1)}disabled={!canNextPage}>
-          {">>"}
+          <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+            {">>"}
           </button>{" "}
         </div>
         <select

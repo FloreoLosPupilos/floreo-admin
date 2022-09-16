@@ -1,7 +1,12 @@
+import {Tabla} from "../components/tabla/tabla";
+import {useLocation} from 'react-router-dom';
+
 export const ServiceView = () => {
+  const location = useLocation();
   return (
+    
     <>
-      Hello Service View
+    <Tabla collection={location.state.nombre} subCollection={true}/>
     </>
   );
 }

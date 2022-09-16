@@ -14,14 +14,18 @@ export const useColumnsServices = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "id",
-        accessor: "id",
+        Header: "Nombre",
+        accessor: "nombre",
       },
       {
-        Header: "Username",
-        accessor: "username",
+        Header: "Informacion",
+        accessor: "informacion",
       },
-
+      {
+        Header: "Precio",
+        accessor: "precio",
+        
+      },
       {
         //actions
         Header: "Actions",

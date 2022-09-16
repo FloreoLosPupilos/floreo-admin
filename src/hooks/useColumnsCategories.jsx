@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from 'react-router-dom';
 
 //Metodo para ver los servicios de la categoria.
 function viewCategory(id) {
@@ -30,8 +31,10 @@ export const useColumnsCategories = () => {
           const rowIdx = props.row.id;
           return (
             <div>
-              <span onClick={() => viewCategory(props.row.original)}>
-                <button style={{}}>Ver</button>
+              <span>
+                <Link to={'/servicios'} state={props.row.original}>
+                  <button onClick={() => viewCategory(props.row.original)} style={{}}>Ver</button>
+                </Link>
               </span>
               <span onClick={() => editCategory(props.row.original)}>
                 <button style={{}}>Editar</button>
