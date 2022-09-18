@@ -2,9 +2,9 @@ import { deleteObject, getDownloadURL, listAll, ref, uploadBytes } from 'firebas
 import {  storage } from '../firebase/config'
 import { v4 } from 'uuid';
 
-export const fileUpload = async( file ) => {
+export const fileUpload = async( file, path = 'carrusel' ) => {
     
-    const storageRef = ref(storage, `carrusel/${v4()}`); //referencia al storage de firebase
+    const storageRef = ref(storage, `${path}/${v4()}`); //referencia al storage de firebase
     await uploadBytes(storageRef, file);
     const urlImage = await getDownloadURL(storageRef);
     return [storageRef.name, urlImage];
