@@ -36,9 +36,6 @@ export const LoginPage = () => {
     [],
   );
 
-  setCollectionData('hello', {name: 'kendall'})
-  
-
   return (
     <>
       <Grid
