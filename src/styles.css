@@ -6,3 +6,8 @@ body{
   overflow-y: hidden; /* Hide vertical scrollbar */
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
+
+.flexbox-center {
+  display: flex;
+  justify-content: center;
+}
