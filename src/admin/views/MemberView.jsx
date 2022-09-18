@@ -1,9 +1,11 @@
 import {Tabla} from "../components/tabla/tabla";
+import { AddMemberModalView } from "./AddMemberModalView";
 
 export const MemberView = () => {
   return (
     <>
-      <Tabla collection="Integrantes" subCollectio={false}/>
+      <AddMemberModalView/>
+      <Tabla collection="Integrantes" subCollection={false} />
     </>
   );
 }
