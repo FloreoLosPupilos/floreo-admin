@@ -115,8 +115,7 @@ export const Tabla = (props) => {
   } = table;
 
   return (
-    <div className="container">
-      <button style={{ height: "20px", width: "20%", marginBottom: "4px", marginLeft: "80%" }}>Agregar {}</button>
+    <div className="container" style={{paddingTop: 0}}>
       <table {...getTableProps()}>
         <thead>
           <tr>
