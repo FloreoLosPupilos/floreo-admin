@@ -15,12 +15,15 @@ export const AddMemberModalView = () => {
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
+  const evt = new CustomEvent("closeModal");
+
   const onSubmit = async ({ name, email, phone }) => {
     if (!memberImage) return
     const [pathStorage, url] = await fileUpload(memberImage, 'members');
     setCollectionData('Integrantes', { nombre: name, contacto: email, telefono: phone, img: url })
 
-    Swal.fire('Imagen guardada', 'Se guardo correctamente la imagen', 'success');
+    window.dispatchEvent(evt);
+    Swal.fire('Integrante creado', 'Se guardo correctamente el nuevo integrante', 'success');
   }
 
   const { isSaving, images } = useSelector(state => state.carrusel);
@@ -38,7 +41,7 @@ export const AddMemberModalView = () => {
   return (
     <>
       <ModalLayout buttonText="Agregar Integrante" modalTitle={"Nuevo Integrante"}>
-        <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster'>
+        <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster' id="form">
           <Grid container direction='row' justifyContent='end' alignItems='center' sx={{ mb: 1 }}>
 
             <Grid container>
@@ -102,19 +105,8 @@ export const AddMemberModalView = () => {
 
 
             <div className="flexbox-center">
-              <img src={newUser} ref={imageRef} style={{ maxWidth: '50%', maxHeight: '50%' }} />
+              <img src={newUser} ref={imageRef} style={{ maxWidth: '50%', maxHeight: '50%', marginLeft: '23%' }} />
             </div>
-
-            <Grid item>
-              <Button
-                type="submit"
-                color='primary'
-                sx={{ padding: 2 }}
-              >
-                <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
-                    Guardar
-                </Button>
-            </Grid>
 
           </Grid>
         </form>

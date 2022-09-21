@@ -16,13 +16,15 @@ export const AddCategoryModalView = () => {
   const imageRef = useRef();
 
   let categoryImage = null
+  const evt = new CustomEvent("closeModal");
 
   const onSubmit = async ({ name }) => {
     if (!categoryImage) return
     const [pathStorage, url] = await fileUpload(categoryImage, 'category');
     setCollectionDataCustomId('Categorias', {  nombre: name, img: url  }, name)
 
-    Swal.fire('Imagen guardada', 'Se guardo correctamente la imagen', 'success');
+    window.dispatchEvent(evt);
+    Swal.fire('Categoria creada', 'Se guardo correctamente la categoria', 'success');
   }
 
   const onFileInputChange = ({ target }) => {
@@ -36,7 +38,7 @@ export const AddCategoryModalView = () => {
   return (
     <>
       <ModalLayout buttonText='Agregar Categoria' modalTitle='Nueva Categoria'>
-        <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster'>
+        <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster' id="form">
           <Grid container direction='row' justifyContent='end' alignItems='center' sx={{ mb: 1 }}>
             <Grid container>
               <TextField
@@ -75,19 +77,8 @@ export const AddCategoryModalView = () => {
 
 
             <div className="flexbox-center">
-              <img src={uploadIcon} ref={imageRef} style={{ maxWidth: '50%', maxHeight: '50%' }} />
+              <img src={uploadIcon} ref={imageRef} style={{ maxWidth: '50%', maxHeight: '50%', marginLeft: '25%' }} />
             </div>
-          </Grid>
-
-          <Grid item style={{marginLeft: '60%'}}>
-            <Button
-              type="submit"
-              color='primary'
-              sx={{ padding: 2 }}
-            >
-              <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
-                    Guardar
-                </Button>
           </Grid>
         </form>
       </ModalLayout>

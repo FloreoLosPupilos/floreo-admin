@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Box, Button, Modal, Typography, IconButton } from '@mui/material';
-import { HighlightOff } from '@mui/icons-material';
+import { Box, Button, Modal, Typography, IconButton, Grid } from '@mui/material';
+import { HighlightOff, SaveOutlined } from '@mui/icons-material';
 
-export const ModalLayout = ({children, buttonText, modalTitle}) => {
+export const ModalLayout = ({ children, buttonText, modalTitle }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const closeModal = () => setOpen(false);
 
   const style = {
     position: 'absolute',
@@ -19,6 +19,16 @@ export const ModalLayout = ({children, buttonText, modalTitle}) => {
     p: 4,
   };
 
+  const handleClose = (event, reason) => {
+    if (reason && reason == "backdropClick") 
+        return;
+    closeModal();
+  }
+
+  window.addEventListener('closeModal', () => {
+    closeModal();
+  });
+
   return (
     <>
       <Button style={{ height: "20px", width: "20%", margin: "1% 1% 1% 79%" }} onClick={handleOpen}>{buttonText}</Button>
@@ -29,13 +39,25 @@ export const ModalLayout = ({children, buttonText, modalTitle}) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <IconButton>
-            <HighlightOff />
-          </IconButton>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {modalTitle}
+            <IconButton sx={{float: 'right'}} onClick={handleClose}>
+              <HighlightOff />
+            </IconButton>
           </Typography>
           {children}
+
+          <Grid item style={{marginLeft: '60%'}}>
+            <Button
+              form="form"
+              type="submit"
+              color='primary'
+              sx={{ padding: 2 }}
+            >
+              <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
+                    Guardar
+                </Button>
+          </Grid>
         </Box>
 
 
