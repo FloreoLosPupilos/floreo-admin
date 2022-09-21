@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { AboutPage, CarrouselPage, PrincipalPage, ServicePage, CategoryPage, MemberPage } from '../pages';
+import { AboutPage, CarrouselPage, ServicePage, CategoryPage, MemberPage } from '../pages';
 import { NavBar } from '../ui/Navbar';
 
 export const AdminRoutes = () => {
@@ -8,7 +8,7 @@ export const AdminRoutes = () => {
         <>
             <NavBar />
             <Routes>
-                <Route path="/" element={<PrincipalPage />} />
+                <Route path="/" element={<AboutPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/carrousel" element={<CarrouselPage />} />
                 <Route path="/servicios" element={<ServicePage />} />
