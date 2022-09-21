@@ -32,8 +32,8 @@ const deleteCategory = async (id) => {
   const dataSize = data.docs.length;
 
   const remove = async (id) => {
-    const memberDoc = doc(FirebaseDB, "Categorias", id);
-    await deleteDoc(memberDoc);
+    const categoryDoc = doc(FirebaseDB, "Categorias", id);
+    await deleteDoc(categoryDoc);
   }
 
   if (dataSize == 0) {
