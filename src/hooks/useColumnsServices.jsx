@@ -1,14 +1,24 @@
 import { useMemo } from "react";
 
-//Metodo para editar una categoria.
+//Firebase
+import { deleteDoc, doc, collection } from "firebase/firestore/lite";
+import { FirebaseDB } from "../firebase/config";
+
+//Metodo para editar un servicio.
 function editService(id) {
   console.log("Editar", id);
 }
 
-//Metodo para eliminar una categoria.
-function deleteService(id) {
-  console.log("Eliminar", id);
+//Metodo para eliminar un servicio.
+const deleteService = async (id) => {
+  console.log(id)
+  const serviceDoc = doc(FirebaseDB, "Categorias", id.category, "Servicios", id.id);
+  await deleteDoc(serviceDoc);
 }
+
+/*function deleteService(id) {
+  console.log("Eliminar", id);
+}*/
 
 export const useColumnsServices = () => {
   const columns = useMemo(
@@ -39,9 +49,7 @@ export const useColumnsServices = () => {
               <button style={{}}>Editar</button>
               </span>
 
-              <span onClick={() => deleteService(rowIdx)}>
-              <button style={{}}>Eliminar</button>
-              </span>
+              <button onClick={() => deleteService(props.row.original)} style={{}}>Eliminar</button>
             </div>
           );
         },
