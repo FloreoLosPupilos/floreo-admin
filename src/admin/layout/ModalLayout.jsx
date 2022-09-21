@@ -1,8 +1,9 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
-import React from "react";
+import { useState } from 'react';
+import { Box, Button, Modal, Typography, IconButton } from '@mui/material';
+import { HighlightOff } from '@mui/icons-material';
 
 export const ModalLayout = ({children, buttonText, modalTitle}) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -28,11 +29,16 @@ export const ModalLayout = ({children, buttonText, modalTitle}) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <IconButton>
+            <HighlightOff />
+          </IconButton>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {modalTitle}
           </Typography>
           {children}
         </Box>
+
+
       </Modal>
     </>
   );
