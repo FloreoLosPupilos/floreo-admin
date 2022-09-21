@@ -1,14 +1,21 @@
 import { useMemo } from "react";
+import { doc, deleteDoc, updateDoc, collection} from "firebase/firestore/lite";
+import { FirebaseDB } from "../firebase/config";
 
-//Metodo para editar una categoria.
+//Metodo para editar un miembro.
 function editMember(id) {
   console.log("Editar", id);
+  
+};
+
+//Metodo para eliminar un miembro.
+const deleteMember = async (id) => {
+  console.log(id)
+  const memberDoc = doc(FirebaseDB, "Integrantes", id.id);
+  await deleteDoc(memberDoc);
 }
 
-//Metodo para eliminar una categoria.
-function deleteMember(id) {
-  console.log("Eliminar", id);
-}
+
 export const useColumnsMembers = () => {
   const columns = useMemo(
     () => [
