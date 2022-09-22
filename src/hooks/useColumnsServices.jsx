@@ -4,6 +4,10 @@ import { useMemo } from "react";
 import { deleteDoc, doc, collection } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/config";
 
+//Dialog
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
+
 //Metodo para editar un servicio.
 function editService(id) {
   console.log("Editar", id);
@@ -11,14 +15,25 @@ function editService(id) {
 
 //Metodo para eliminar un servicio.
 const deleteService = async (id) => {
-  console.log(id)
   const serviceDoc = doc(FirebaseDB, "Categorias", id.category, "Servicios", id.id);
-  await deleteDoc(serviceDoc);
-}
 
-/*function deleteService(id) {
-  console.log("Eliminar", id);
-}*/
+  const remove = async (id) => {
+    const categoryDoc = doc(FirebaseDB, "Categorias", id.category, "Servicios", id.id);
+    await deleteDoc(categoryDoc);
+  }
+
+  Swal.fire({
+    title: '¿Está seguro de eliminar el servicio: ' + id.nombre +'?',
+    showCancelButton: true,
+    confirmButtonText: 'Eliminar',
+    denyButtonText: `Cancelar`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      remove(id.id);
+      Swal.fire('Servicio ' + id.nombre + ' eliminado correctamente', '', 'success');
+    }
+  })
+}
 
 export const useColumnsServices = () => {
   const columns = useMemo(
