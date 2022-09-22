@@ -30,6 +30,7 @@ export const ImageGallery = ({ images}) => {
 
   return (
     <Container>
+
       <ImageList
         gap={12}
         sx={{

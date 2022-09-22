@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startNewImage } from '../../store/carrusel/thunks';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import { Title } from './Title';
+
 
 export const ImageView = () => {
     
@@ -17,10 +19,17 @@ export const ImageView = () => {
 
 
     const onFileInputChange = async({target}) => {
-        if (target.files === 0) return;
-        const [pathStorage, url] = await fileUpload(target.files[0]);  
-        dispatch( startNewImage(url, pathStorage) );
-        Swal.fire('Imagen guardada', 'Se guardo correctamente la imagen', 'success');
+
+        if (images.length >= 10) {
+            Swal.fire('Subiendo Imagen', 'No se puede agregar más imagenes', 'error');
+            return;
+        } else if (target.files === 0) {
+            return;
+        } else {
+            const [pathStorage, url] = await fileUpload(target.files[0]);  
+            dispatch( startNewImage(url, pathStorage) );
+            Swal.fire('Imagen guardada', 'Se guardo correctamente la imagen', 'success');
+        }
 
     };   
 
@@ -39,18 +48,21 @@ export const ImageView = () => {
                     onChange={ onFileInputChange }
                     style={{ display: 'none' }}
                 /> 
+                
+                <Title title="Carrusel" />
+
 
                 <IconButton
                     color="primary"
                     disabled={ isSaving }
                     onClick={ () => fileInputRef.current.click()}
                 >
-                    <UploadOutlined />
+                    <UploadOutlined fontSize="large" />
                 </IconButton>
             </Grid>
 
             <Grid container direction='row' alignItems='center' justifyContent='center' sx={{ ml: '20px' }}>
-                
+
                 <ImageGallery 
                     images={ images }
                 />

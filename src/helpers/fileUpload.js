@@ -13,7 +13,6 @@ export const fileUpload = async( file, path = 'carrusel' ) => {
 
 export const deleteImage = async(imageName) => {
     const storageRef = ref(storage, `carrusel/${imageName}`);
-    console.log(storageRef);
     deleteObject(storageRef).then().catch((error) => {
         console.log(error);
     })
