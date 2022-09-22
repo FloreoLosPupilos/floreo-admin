@@ -5,10 +5,8 @@ import { Link } from 'react-router-dom';
 import { deleteDoc, doc, collection, getDocs } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/config";
 
-
 //Modal de editar
-import { ModalLayout } from "../admin/layout/ModalLayout";
-
+import { EditCategoryModalView } from "../admin/views/EditCategoryModalView";
 
 //Dialog
 import Swal from 'sweetalert2';
@@ -38,7 +36,7 @@ const deleteCategory = async (id) => {
 
   if (dataSize == 0) {
     Swal.fire({
-      title: '¿Está seguro de eliminar la categoria: ' + id+'?',
+      title: '¿Está seguro de eliminar la categoria: ' + id + '?',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
       denyButtonText: `Cancelar`,
@@ -79,9 +77,9 @@ export const useColumnsCategories = () => {
                 </Link>
               </span>
               <span>
-                <button onClick={() => editCategory(props.row.original)} style={{}}>Ver</button>
+                <EditCategoryModalView data={props.row.original} />
               </span>
-                <button onClick={() => deleteCategory(props.row.original.id)} style={{}}>Eliminar</button>
+              <button onClick={() => deleteCategory(props.row.original.id)} style={{}}>Eliminar</button>
             </div>
           );
         },
