@@ -166,11 +166,13 @@ export const Tabla = (props) => {
                       // Apply the cell props
                       return (
                         <td {...cell.getCellProps()}>
+                          <div>
                           {
 
                             // Render the cell contents
                             cell.render("Cell")
                           }
+                          </div>
                           {imgDataLoader(cell)}
 
                         </td>

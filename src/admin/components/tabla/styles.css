@@ -17,6 +17,14 @@ tr:last-child td {
   border-bottom: 0;
 }
 
+td div {
+  white-space: nowrap; 
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 th,
 td {
   margin: 0;
