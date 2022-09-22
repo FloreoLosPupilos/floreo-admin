@@ -8,7 +8,7 @@ export const ServiceView = () => {
     
     <>
     <AddServiceModalView />
-    <Tabla collection={location.state.nombre} subCollection={true}/>
+    <Tabla collection={location.state.id} subCollection={true}/>
     </>
   );
 }
