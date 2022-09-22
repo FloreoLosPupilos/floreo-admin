@@ -29,7 +29,7 @@ const deleteService = async (id) => {
     denyButtonText: `Cancelar`,
   }).then((result) => {
     if (result.isConfirmed) {
-      remove(id.id);
+      remove(id);
       Swal.fire('Servicio ' + id.nombre + ' eliminado correctamente', '', 'success');
     }
   })
