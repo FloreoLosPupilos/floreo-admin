@@ -7,10 +7,13 @@ import { FirebaseDB } from "../firebase/config";
 
 //Modal de editar
 import { EditCategoryModalView } from "../admin/views/EditCategoryModalView";
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 
 //Dialog
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import { IconButton } from "@mui/material";
 
 
 //Metodo para ver los servicios de la categoria.
@@ -73,13 +76,13 @@ export const useColumnsCategories = () => {
             <div>
               <span>
                 <Link to={'/servicios'} state={props.row.original}>
-                  <button onClick={() => viewCategory(props.row.original)} style={{}}>Ver</button>
+                  <IconButton onClick={() => viewCategory(props.row.original)} style={{}}><VisibilityRoundedIcon /></IconButton>
                 </Link>
               </span>
               <span>
                 <EditCategoryModalView data={props.row.original} />
               </span>
-              <button onClick={() => deleteCategory(props.row.original.id)} style={{}}>Eliminar</button>
+              <IconButton onClick={() => deleteCategory(props.row.original.id)} style={{}}><DeleteIcon /></IconButton>
             </div>
           );
         },
