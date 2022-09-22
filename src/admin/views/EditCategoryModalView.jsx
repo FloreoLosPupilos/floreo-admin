@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import uploadIcon from "../../assets/uploadIcon.png"
 import Swal from 'sweetalert2';
 
+
 export const EditCategoryModalView = (props) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const { isSaving, images } = useSelector(state => state);

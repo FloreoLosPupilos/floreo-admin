@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Button, Modal, Typography, IconButton, Grid } from '@mui/material';
 import { HighlightOff, SaveOutlined } from '@mui/icons-material';
-
+import EditIcon from '@mui/icons-material/Edit';
 export const ModalEditLayout = ({ children, buttonText, modalTitle }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -31,7 +31,7 @@ export const ModalEditLayout = ({ children, buttonText, modalTitle }) => {
 
   return (
     <>
-      <button style={{}} onClick={handleOpen}>{buttonText}</button>
+      <IconButton style={{}} onClick={handleOpen}><EditIcon/></IconButton>
       <Modal
         open={open}
         onClose={handleClose}
