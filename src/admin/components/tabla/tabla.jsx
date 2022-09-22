@@ -25,7 +25,7 @@ function imgDataLoader(cell) {
 }
 
 //Filtro de busqueda
-function CarsFilter({ globalFilter, setGlobalFilter }) {
+function Filter({ globalFilter, setGlobalFilter }) {
   const [value, setValue] = useState(globalFilter);
 
   const onFilterChange = useAsyncDebounce(
@@ -39,7 +39,7 @@ function CarsFilter({ globalFilter, setGlobalFilter }) {
   };
 
   return (
-    <span className="cars-filter">
+    <span className="">
       Buscar &nbsp;{" "}
       <input
         size={40}
@@ -120,7 +120,7 @@ export const Tabla = (props) => {
         <thead>
           <tr>
             <th colSpan={4}>
-              <CarsFilter
+              <Filter
                 preGlobalFilteredRows={preGlobalFilteredRows}
                 globalFilter={globalFilter}
                 setGlobalFilter={setGlobalFilter}
