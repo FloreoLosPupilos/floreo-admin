@@ -39,7 +39,7 @@ export const AboutView = () => {
     
     return (
         <Grid container direction='row' justifyContent='end'  alignItems='center' sx={{mb: 1}}>
-            <Title title='About' />
+            <Title title='Nosotros' />
             <Grid 
                 container
                 sx={{

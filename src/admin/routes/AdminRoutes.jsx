@@ -9,7 +9,7 @@ export const AdminRoutes = () => {
             <NavBar />
             <Routes>
                 <Route path="/" element={<CarrouselPage />} />
-                <Route path="/sobre" element={<AboutPage />} />
+                <Route path="/nosotros" element={<AboutPage />} />
                 <Route path="/carrusel" element={<CarrouselPage />} />
                 <Route path="/servicios" element={<ServicePage />} />
                 <Route path="/categoria" element={<CategoryPage />} />
