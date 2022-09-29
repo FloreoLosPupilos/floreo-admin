@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export const AddMemberModalView = () => {
   const fileInputRef = useRef();
   const imageRef = useRef();
+  const textInput = useRef(null);
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -21,6 +22,8 @@ export const AddMemberModalView = () => {
     if (!memberImage) return
     const [pathStorage, url] = await fileUpload(memberImage, 'members');
     setCollectionData('Integrantes', { nombre: name, contacto: email, telefono: phone, img: url })
+    textInput.current.value = "";
+
 
     window.dispatchEvent(evt);
     Swal.fire('Integrante creado', 'Se guardo correctamente el nuevo integrante', 'success');
@@ -51,6 +54,7 @@ export const AddMemberModalView = () => {
                 fullWidth
                 placeholder='Ingrese el nombre'
                 label="Nombre"
+                inputRef={textInput}
                 sx={{ border: 'none', mb: 1, ml: 1, mr: 1 }}
                 {...register("name", { required: true })}
               />
@@ -62,6 +66,7 @@ export const AddMemberModalView = () => {
                 fullWidth
                 placeholder='Ingrese el contacto'
                 label="Contacto"
+                inputRef={textInput}
                 sx={{ border: 'none', mb: 1, ml: 1, mr: 1 }}
                 {...register("email", { required: true })}
               />
@@ -73,6 +78,7 @@ export const AddMemberModalView = () => {
                 fullWidth
                 placeholder='Ingrese el número de teléfono'
                 label="Teléfono"
+                inputRef={textInput}
                 sx={{ border: 'none', mb: 1, ml: 1, mr: 1 }}
                 name="Teléfono"
                 {...register("phone", { required: true })}
