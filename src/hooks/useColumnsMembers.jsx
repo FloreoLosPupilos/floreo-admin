@@ -68,7 +68,9 @@ export const useColumnsMembers = () => {
           const rowIdx = props.row.id;
           return (
             <div>
-              
+              <span>
+                <EditMemberModalView data={props.row.original} />
+              </span>
               <IconButton onClick={() => deleteMember(props.row.original)} style={{}}><DeleteIcon /></IconButton>
             </div>
           );
