@@ -8,6 +8,11 @@ import { FirebaseDB } from "../firebase/config";
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import { EditServiceModalView } from "../admin/views/EditServiceModalView";
+
+import { IconButton } from "@mui/material";
+
 //Metodo para editar un servicio.
 function editService(id) {
   console.log("Editar", id);
@@ -60,11 +65,10 @@ export const useColumnsServices = () => {
           console.log(props.row.original.nombre);
           return (
             <div>
-              <span onClick={() => editService(props.row.original)}>
-              <button style={{}}>Editar</button>
+              <span>
+                <EditServiceModalView data={props.row.original} />
               </span>
-
-              <button onClick={() => deleteService(props.row.original)} style={{}}>Eliminar</button>
+              <IconButton onClick={() => deleteService(props.row.original)} style={{}}><DeleteIcon /></IconButton>
             </div>
           );
         },
