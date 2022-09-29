@@ -16,7 +16,7 @@ export default function GetCollectionData(props,bool) {
   useEffect(() => {
     const getCollections = async () => {
       const data = await getDocs(docCollection);
-      setCollections(data.docs.map((doc) => ({ ...doc.data(), id: doc.id , category: props.collection})));
+      setCollections(data.docs.map((doc) => ({ ...doc.data(), categoryID: props.collection, id: doc.id , category: props.collection})));
     };
     getCollections();
   }, []);
