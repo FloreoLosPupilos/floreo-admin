@@ -2,6 +2,10 @@ import 'regenerator-runtime/runtime'
 import React, { useState, useMemo } from 'react';
 import "./styles.css";
 
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import LastPageIcon from '@mui/icons-material/LastPage';
+import { IconButton } from '@mui/material';
+
 //Firebase
 import GetCollectionData from './getCollectionData';
 
@@ -39,12 +43,12 @@ function Filter({ globalFilter, setGlobalFilter }) {
   };
 
   return (
-    <span className="">
-      Buscar &nbsp;{" "}
+    <span style={{ backgroundColor: "white" }}>
       <input
         size={40}
         value={value || ""}
         onChange={handleInputChange}
+        placeholder="Buscar..."
       />
     </span>
   );
@@ -115,19 +119,15 @@ export const Tabla = (props) => {
   } = table;
 
   return (
-    <div className="container" style={{paddingTop: 0}}>
+    <div className="container" style={{ paddingTop: 0 }}>
+      <div className='search' style={{ margin: "0px" }}>
+        <Filter
+          preGlobalFilteredRows={preGlobalFilteredRows}
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
+      </div>
       <table {...getTableProps()}>
-        <thead>
-          <tr>
-            <th colSpan={4}>
-              <Filter
-                preGlobalFilteredRows={preGlobalFilteredRows}
-                globalFilter={globalFilter}
-                setGlobalFilter={setGlobalFilter}
-              />
-            </th>
-          </tr>
-        </thead>
         <thead>
           {
             // Loop over the header rows
@@ -138,7 +138,7 @@ export const Tabla = (props) => {
                   // Loop over the headers in each row
                   headerGroup.headers.map((column) => (
                     // Apply the header cell props
-                    <th {...column.getHeaderProps()}>
+                    <th className='colums'{...column.getHeaderProps()}>
                       {
                         // Render the header
                         column.render("Header")
@@ -165,13 +165,14 @@ export const Tabla = (props) => {
                     row.cells.map((cell) => {
                       // Apply the cell props
                       return (
-                        <td {...cell.getCellProps()}>
-                          <div>
-                          {
+                        <td data={cell.column.Header} {...cell.getCellProps()}>
 
-                            // Render the cell contents
-                            cell.render("Cell")
-                          }
+                          <div>
+                            {
+
+                              // Render the cell contents
+                              cell.render("Cell")
+                            }
                           </div>
                           {imgDataLoader(cell)}
 
@@ -193,18 +194,18 @@ export const Tabla = (props) => {
           </strong>{" "}
         </span>
         <div>
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-            {"<<"}
-          </button>{" "}
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            Atras
-          </button>{" "}
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
+          <IconButton onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            <FirstPageIcon />
+          </IconButton>{" "}
+          <IconButton onClick={() => previousPage()} disabled={!canPreviousPage}>
+            Atrás
+          </IconButton>{" "}
+          <IconButton onClick={() => nextPage()} disabled={!canNextPage}>
             Siguiente
-          </button>{" "}
-          <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-            {">>"}
-          </button>{" "}
+          </IconButton>{" "}
+          <IconButton onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+            <LastPageIcon />
+          </IconButton>{" "}
         </div>
         <select
           value={pageSize}
@@ -214,8 +215,10 @@ export const Tabla = (props) => {
             <option key={pageSize} value={pageSize}>
               {pageSize !== 15 ? `Mostrar ${pageSize}` : `Mostrar todo`}
             </option>
+
           ))}
         </select>
+
       </div>
     </div>
   );
