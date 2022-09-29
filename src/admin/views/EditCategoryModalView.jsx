@@ -25,12 +25,12 @@ export const EditCategoryModalView = (props) => {
       setCollectionDataCustomId('Categorias', { nombre: name, img: url }, props.data.id)
 
       window.dispatchEvent(evt);
-      Swal.fire('Categoria Modificada', 'Se actualizó correctamente la categoria', 'success');
+      Swal.fire('Categoría Modificada', 'Se actualizó correctamente la categoría', 'success');
     }else{
       setCollectionDataCustomId('Categorias', { nombre: name, img: props.data.img }, props.data.id)
 
       window.dispatchEvent(evt);
-      Swal.fire('Categoria Modificada', 'Se actualizó correctamente la categoria', 'success');
+      Swal.fire('Categoría Modificada', 'Se actualizó correctamente la categoría', 'success');
     }
   }
 
@@ -44,7 +44,7 @@ export const EditCategoryModalView = (props) => {
 
   return (
     <>
-      <ModalEditLayout buttonText='Editar' modalTitle='Editar Categoria'>
+      <ModalEditLayout buttonText='Editar' modalTitle='Editar Categoría'>
         <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster' id="form">
           <Grid container direction='row' justifyContent='end' alignItems='center' sx={{ mb: 1 }}>
             <Grid container>
@@ -62,11 +62,11 @@ export const EditCategoryModalView = (props) => {
 
           <Grid item>
             <Typography style={{ width: '85%', display: 'inline' }} id="modal-modal-title" variant="subtitle1" component="h2">
-              Imagen de la categoria
+              Imagen de la categoría
             </Typography>
 
             <IconButton
-              style={{ marginLeft: '30%' }}
+              style={{ marginLeft: '38%' }}
               color="primary"
               disabled={isSaving}
               onClick={() => fileInputRef.current.click()}

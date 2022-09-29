@@ -54,7 +54,7 @@ export const NavBar = () => {
             }}
           >
             <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-                Home
+                Inicio
             </Link>
           </Typography>
           
@@ -133,8 +133,8 @@ export const NavBar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <MenuItem key={'Logout'} onClick={onLogout}>
-                  <Typography textAlign="center">{'Logout'}</Typography>
+              <MenuItem key={'Cerrar sesión'} onClick={onLogout}>
+                  <Typography textAlign="center">{'Cerrar sesión'}</Typography>
               </MenuItem>      
             </Tooltip>
           </Box>

@@ -37,7 +37,7 @@ export const AddCategoryModalView = () => {
 
   return (
     <>
-      <ModalLayout buttonText='Agregar Categoria' modalTitle='Nueva Categoria'>
+      <ModalLayout buttonText='Agregar Categoría' modalTitle='Nueva Categoría'>
         <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster' id="form">
           <Grid container direction='row' justifyContent='end' alignItems='center' sx={{ mb: 1 }}>
             <Grid container>
@@ -56,11 +56,11 @@ export const AddCategoryModalView = () => {
 
           <Grid item>
             <Typography style={{ width: '85%', display: 'inline' }} id="modal-modal-title" variant="subtitle1" component="h2">
-              Imagen del servicio
+              Imagen de la categoría
           </Typography>
 
             <IconButton
-              style={{ marginLeft: '45%' }}
+              style={{ marginLeft: '38%' }}
               color="primary"
               disabled={isSaving}
               onClick={() => fileInputRef.current.click()}

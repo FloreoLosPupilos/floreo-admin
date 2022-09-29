@@ -58,8 +58,8 @@ export const useColumnsServices = () => {
       },
       {
         //actions
-        Header: "Actions",
-        accessor: "actions",
+        Header: "Acciones",
+        accessor: "acciones",
         Cell: (props) => {
           const rowIdx = props.row.id;
           console.log(props.row.original.nombre);

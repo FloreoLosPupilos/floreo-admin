@@ -50,7 +50,7 @@ export const LoginPage = () => {
           className='box-shadow'
           xs={3}
           sx={{ backgroundColor: 'white', padding: 3, borderRadious: 2 }}>
-          <Typography variant='h5' sx={{ mb: 1 }}>Login</Typography>
+          <Typography variant='h5' sx={{ mb: 1 }}>Inicio de sesión</Typography>
           <form onSubmit={onSubmit}>
             <Grid container>
               <Grid item xs={12} sx={{ mt: 2 }}>
