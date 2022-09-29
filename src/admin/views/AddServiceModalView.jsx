@@ -11,31 +11,17 @@ import Swal from 'sweetalert2';
 
 export const AddServiceModalView = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const { isSaving, images } = useSelector(state => state.carrusel);
 
   const location = useLocation();
-  const fileInputRef = useRef();
-  const imageRef = useRef();
 
-  let categoryImage = null
   const evt = new CustomEvent("closeModal");
 
   const onSubmit = async ({ name, information, price}) => {
-    if (!categoryImage) return
-    const [pathStorage, url] = await fileUpload(categoryImage, 'category');
-    setService('Categorias', { nombre: name, informacion: information, precio: price, img: url }, location.state.nombre)
+    setService('Categorias', { nombre: name, informacion: information, precio: price }, location.state.nombre)
 
     window.dispatchEvent(evt);
     Swal.fire('Servicio creado', 'Se guardo correctamente el nuevo servicio', 'success');
   }
-
-  const onFileInputChange = ({ target }) => {
-    if (target.files === 0) return;
-
-    const [file] = target.files
-    categoryImage = target.files[0];
-    if (file) imageRef.current.src = URL.createObjectURL(file)
-  };
 
   return (
     <>
@@ -82,32 +68,6 @@ export const AddServiceModalView = () => {
             {errors.name && <span style={{ color: 'red' }}> Este campo es requerido</span>}
           </Grid>
 
-          <Grid item>
-            <Typography style={{ width: '85%', display: 'inline' }} id="modal-modal-title" variant="subtitle1" component="h2">
-              Imagen del servicio
-          </Typography>
-
-            <IconButton
-              style={{ marginLeft: '45%' }}
-              color="primary"
-              disabled={isSaving}
-              onClick={() => fileInputRef.current.click()}
-            >
-              <UploadOutlined />
-            </IconButton>
-
-            <input
-              type='file'
-              ref={fileInputRef}
-              onChange={onFileInputChange}
-              style={{ display: 'none' }}
-            />
-
-
-            <div className="flexbox-center">
-              <img src={uploadIcon} ref={imageRef} style={{ maxWidth: '50%', maxHeight: '50%', marginLeft: '25%' }} />
-            </div>
-          </Grid>
         </form>
       </ModalLayout>
     </>
