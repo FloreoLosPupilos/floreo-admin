@@ -1,7 +1,7 @@
 {
-  "homepage": "http://kwalsh15.github.io/Floreo_Admin",
+  "homepage": "http://kwalsh15.github.io/floreo-admin",
   "name": "floreo-admin",
-  "private": false,
+  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
