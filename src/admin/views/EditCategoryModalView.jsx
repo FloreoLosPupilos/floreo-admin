@@ -1,11 +1,10 @@
 import { ModalEditLayout } from "../layout/ModalEditLayout";
 import { useForm } from "react-hook-form";
 import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import { UploadOutlined } from "@mui/icons-material";
 import { fileUpload, setCollectionDataCustomId } from "../../helpers";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import uploadIcon from "../../assets/uploadIcon.png"
 import Swal from 'sweetalert2';
 
 

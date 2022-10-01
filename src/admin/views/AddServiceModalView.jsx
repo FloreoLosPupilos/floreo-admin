@@ -1,12 +1,8 @@
 import { ModalLayout } from "../layout/ModalLayout";
 import { useForm } from "react-hook-form";
-import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
-import { fileUpload, setService } from "../../helpers";
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { Grid, TextField } from "@mui/material";
+import { setService } from "../../helpers";
 import {useLocation} from 'react-router-dom';
-import uploadIcon from "../../assets/uploadIcon.png"
 import Swal from 'sweetalert2';
 
 export const AddServiceModalView = () => {

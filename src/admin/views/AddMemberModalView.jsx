@@ -6,7 +6,6 @@ import { fileUpload, setCollectionData } from "../../helpers";
 import { ModalLayout } from "../layout/ModalLayout";
 import React from "react";
 import { useForm } from "react-hook-form";
-import newUser from "../../assets/newUser.png"
 import Swal from 'sweetalert2';
 
 export const AddMemberModalView = () => {
@@ -15,6 +14,8 @@ export const AddMemberModalView = () => {
   const textInput = useRef(null);
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+  const newUser = 'https://github.com/kwalsh15/floreo-admin/blob/main/src/assets/newUser.png?raw=true';
 
   const evt = new CustomEvent("closeModal");
 

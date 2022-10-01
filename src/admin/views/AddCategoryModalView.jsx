@@ -5,7 +5,6 @@ import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
 import { fileUpload, setCollectionDataCustomId } from "../../helpers";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
-import uploadIcon from "../../assets/uploadIcon.png"
 import Swal from 'sweetalert2';
 
 export const AddCategoryModalView = () => {
@@ -14,6 +13,8 @@ export const AddCategoryModalView = () => {
 
   const fileInputRef = useRef();
   const imageRef = useRef();
+
+  const uploadIcon = 'https://github.com/kwalsh15/floreo-admin/blob/main/src/assets/uploadIcon.png?raw=true';
 
   let categoryImage = null
   const evt = new CustomEvent("closeModal");
