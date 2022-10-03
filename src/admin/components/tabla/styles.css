@@ -18,10 +18,16 @@ thead{
   font-size: large;
 }
 
+.colums{
+  background-color: rgba(161, 171, 171, 0.413);
+  border-top: 1.5px solid rgb(180, 180, 180); ;
+}
+
 .search
 {
   position: sticky;
-  top: 0;
+  top: 0px;
+  padding: 0px 0px 10px 0px;
 }
 
 .search input{
@@ -99,6 +105,29 @@ table td {
   table tr:nth-child(2) {
     border-top: none;
   }
+  .pagination {
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    bottom: 0;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: .25em .5em;
+  }
+  
+  .page-controller {
+    width: 20px;
+    height: 17px;
+    display: flex;
+  }
+  
+  select {
+    border: 1.5px solid #000000;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    
+  }
 }
 @media screen and (min-width: 600px) {
   table tr:hover {
@@ -125,29 +154,40 @@ table td {
     padding: 1em !important;
   }
   .search
-	{
-		width: 95%;
-		margin: 0 auto;
-	}
-}
-
-.pagination {
-  background-color: white;
+  {
   position: sticky;
-  bottom: 0;
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-}
+  top: 0;
+  }
 
-.page-controller {
-  width: 20px;
-  height: 17px;
-  display: flex;
-}
-
-select {
-  border: 1.5px solid #000000;
-  border-radius: 10px;
+  .search input{
+    border-radius: 10px;
+    height: 30px;
+    border: 2.5px solid #000000;
+    padding: 0 4px 0 4px;
+    background-color: white;
+    width:45%;
+  }
+  .pagination {
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    bottom: 0;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: .25em .5em;
+    height: 10%;
+  }
+  
+  .page-controller {
+    width: 90px;
+    height: 11px;
+  }
+  
+  select {
+    border: 1.5px solid #000000;
+    border-radius: 10px;
+  }
   
 }
+
+
