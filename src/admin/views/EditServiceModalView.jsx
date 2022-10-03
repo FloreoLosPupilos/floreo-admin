@@ -9,10 +9,6 @@ import { startLoadingCustomServices } from "../../store/collections/thunks";
 
 export const EditServiceModalView = (props) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const { isSaving, images } = useSelector(state => state);
-
-  const fileInputRef = useRef();
-  const imageRef = useRef();
 
   const evt = new CustomEvent("closeModal");
 
@@ -22,13 +18,13 @@ export const EditServiceModalView = (props) => {
     Swal.fire('Servicio Modificado', 'Se actualizó correctamente el Servicio', 'success');
 
 
-    const updateServices = { nombre: name, informacion: info, precio: price, categoria: props.data.categoria };
+    const updateServices = { nombre: name, informacion: info, precio: price, categoria: props.data.categoria, id: props.data.id };
 
     const newServices = props.services.filter(object => {
       return object.id != props.data.id;
     });
     newServices.push(updateServices);
-    props.dis(startLoadingCustomServices("", newServices))  
+    props.dis(startLoadingCustomServices("", newServices))
   }
 
   return (
