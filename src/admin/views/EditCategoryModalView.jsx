@@ -21,13 +21,11 @@ export const EditCategoryModalView = (props) => {
   const onSubmit = async ({ name }) => {
     if (categoryImage != props.data.img) {
       const [pathStorage, url] = await fileUpload(categoryImage, 'category');
-      setCollectionDataCustomId('Categorias', { nombre: name, img: url }, props.data.id)
-
+      setCollectionDataCustomId('Categorias', { nombre: name, img: url }, props.data.id, props.dis);
       window.dispatchEvent(evt);
       Swal.fire('Categoría Modificada', 'Se actualizó correctamente la categoría', 'success');
     }else{
-      setCollectionDataCustomId('Categorias', { nombre: name, img: props.data.img }, props.data.id)
-
+      setCollectionDataCustomId('Categorias', { nombre: name, img: props.data.img }, props.data.id, props.dis);
       window.dispatchEvent(evt);
       Swal.fire('Categoría Modificada', 'Se actualizó correctamente la categoría', 'success');
     }
