@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 //Firebase
-import { doc, deleteDoc, updateDoc, collection} from "firebase/firestore/lite";
+import { doc, deleteDoc, updateDoc, collection } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/config";
 import { isAsyncThunkAction } from "@reduxjs/toolkit";
 
@@ -14,6 +14,8 @@ import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import { IconButton } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { startLoadingMembers } from "../store/collections/thunks";
 
 //Metodo para editar un miembro.
 function editMember(id) {
@@ -21,27 +23,30 @@ function editMember(id) {
 };
 
 //Metodo para eliminar un miembro.
-const deleteMember = async (id) => {
+const deleteMember = async (data, dispatch) => {
 
   const remove = async (id) => {
-    const memberDoc = doc(FirebaseDB, "Integrantes", id.id);
+    const memberDoc = doc(FirebaseDB, "Integrantes", id);
     await deleteDoc(memberDoc);
+    dispatch(startLoadingMembers());
   }
-  
+
   Swal.fire({
-    title: '¿Está seguro de eliminar el integrante: ' + id.nombre + '?',
+    title: '¿Está seguro de eliminar el integrante: ' + data.nombre + '?',
     showCancelButton: true,
     confirmButtonText: 'Eliminar',
     denyButtonText: `Cancelar`,
   }).then((result) => {
     if (result.isConfirmed) {
-      remove(id);
-      Swal.fire('Integrante ' + id.nombre + ' eliminado correctamente', '', 'success');
+      remove(data.id);
+      Swal.fire('Integrante ' + data.nombre + ' eliminado correctamente', '', 'success');
     }
   })
 }
 
 export const useColumnsMembers = () => {
+  const dispatch = useDispatch();
+
   const columns = useMemo(
     () => [
       {
@@ -65,13 +70,12 @@ export const useColumnsMembers = () => {
         Header: "Acciones",
         accessor: "acciones",
         Cell: (props) => {
-          const rowIdx = props.row.id;
           return (
             <div>
               <span>
-                <EditMemberModalView data={props.row.original} />
+                <EditMemberModalView data={props.row.original} dis={dispatch} />
+                <IconButton onClick={() => deleteMember(props.row.original, dispatch)}><DeleteIcon style={{ fill: "#E00000" }} /></IconButton>
               </span>
-              <IconButton onClick={() => deleteMember(props.row.original)} style={{}}><DeleteIcon /></IconButton>
             </div>
           );
         },

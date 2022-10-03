@@ -14,11 +14,13 @@ import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import { IconButton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { startLoadingCategories, startLoadingCustomServices } from "../store/collections/thunks";
 
 
 //Metodo para ver los servicios de la categoria.
-function viewCategory(id) {
-  console.log("Ver", id);
+function viewCategory(id, services, dispatch) {
+  dispatch(startLoadingCustomServices(id.id, services));
 }
 
 //Metodo para editar una categoria.
@@ -27,26 +29,29 @@ function editCategory(id) {
 }
 
 //Metodo para eliminar una categoria.
-const deleteCategory = async (id) => {
-  const docCollection = collection(FirebaseDB, 'Categorias', id, 'Servicios');
-  const data = await getDocs(docCollection);
-  const dataSize = data.docs.length;
+const deleteCategory = (data, services, dispatch) => {
+  let dataSize = 0;
+  services.forEach(element => {
+    if (element.categoria == data.id)
+      dataSize++;
+  });
 
   const remove = async (id) => {
     const categoryDoc = doc(FirebaseDB, "Categorias", id);
     await deleteDoc(categoryDoc);
+    dispatch(startLoadingCategories());
   }
 
   if (dataSize == 0) {
     Swal.fire({
-      title: '¿Está seguro de eliminar la categoria: ' + id + '?',
+      title: '¿Está seguro de eliminar la categoria: ' + data.nombre + '?',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
-        remove(id);
-        Swal.fire('Categoria ' + id + ' eliminada correctamente', '', 'success');
+        remove(data.id);
+        Swal.fire('Categoria ' + data.nombre + ' eliminada correctamente', '', 'success');
       }
     })
   } else {
@@ -59,6 +64,8 @@ const deleteCategory = async (id) => {
 
 }
 export const useColumnsCategories = () => {
+  const dispatch = useDispatch();
+  const services = useSelector(state => state.collections.services);
 
   const columns = useMemo(
     () => [
@@ -71,18 +78,15 @@ export const useColumnsCategories = () => {
         Header: "Acciones",
         accessor: "acciones",
         Cell: (props) => {
-          const rowIdx = props.row.id;
           return (
             <div>
               <span>
                 <Link to={'/servicios'} state={props.row.original}>
-                  <IconButton onClick={() => viewCategory(props.row.original)} style={{}}><VisibilityRoundedIcon /></IconButton>
+                  <IconButton onClick={() => viewCategory(props.row.original, services, dispatch)}><VisibilityRoundedIcon style={{ fill: "#0000E0" }} /></IconButton>
                 </Link>
+                <EditCategoryModalView data={props.row.original} dis={dispatch} />
+                <IconButton onClick={() => deleteCategory(props.row.original, services, dispatch)}><DeleteIcon style={{ fill: "#E00000" }} /></IconButton>
               </span>
-              <span>
-                <EditCategoryModalView data={props.row.original} />
-              </span>
-              <IconButton onClick={() => deleteCategory(props.row.original.id)} style={{}}><DeleteIcon /></IconButton>
             </div>
           );
         },

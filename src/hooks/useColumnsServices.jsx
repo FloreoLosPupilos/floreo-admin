@@ -1,16 +1,18 @@
 import { useMemo } from "react";
+import { startLoadingCustomServices, startLoadingServices } from "../store/collections/thunks";
+import { useDispatch, useSelector } from "react-redux";
 
 //Firebase
-import { deleteDoc, doc, collection } from "firebase/firestore/lite";
+import { deleteDoc, doc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/config";
 
-//Dialog
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.css';
-
-import DeleteIcon from '@mui/icons-material/Delete';
+//Modal
 import { EditServiceModalView } from "../admin/views/EditServiceModalView";
 
+//Dialog&Icons
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from "@mui/material";
 
 //Metodo para editar un servicio.
@@ -19,28 +21,34 @@ function editService(id) {
 }
 
 //Metodo para eliminar un servicio.
-const deleteService = async (id) => {
-  const serviceDoc = doc(FirebaseDB, "Categorias", id.category, "Servicios", id.id);
-
+const deleteService = (data, services, dispatch) => {
   const remove = async (id) => {
-    const categoryDoc = doc(FirebaseDB, "Categorias", id.category, "Servicios", id.id);
+    const categoryDoc = doc(FirebaseDB, "Servicios", id);
     await deleteDoc(categoryDoc);
+    dispatch(startLoadingServices());
   }
-
   Swal.fire({
-    title: '¿Está seguro de eliminar el servicio: ' + id.nombre +'?',
+    title: '¿Está seguro de eliminar el servicio: ' + data.nombre + '?',
     showCancelButton: true,
     confirmButtonText: 'Eliminar',
     denyButtonText: `Cancelar`,
   }).then((result) => {
     if (result.isConfirmed) {
-      remove(id);
-      Swal.fire('Servicio ' + id.nombre + ' eliminado correctamente', '', 'success');
+      remove(data.id);
+      Swal.fire('Servicio ' + data.nombre + ' eliminado correctamente', '', 'success');
+
+      const newServices = services.filter(object => {
+        return object.id != data.id;
+      });
+      dispatch(startLoadingCustomServices("", newServices))
     }
   })
 }
 
 export const useColumnsServices = () => {
+  const dispatch = useDispatch();
+  const services = useSelector(state => state.collections.services);
+  const customServices = useSelector(state => state.collections.customServices);
   const columns = useMemo(
     () => [
       {
@@ -54,21 +62,19 @@ export const useColumnsServices = () => {
       {
         Header: "Precio",
         accessor: "precio",
-        
+
       },
       {
         //actions
         Header: "Acciones",
         accessor: "acciones",
         Cell: (props) => {
-          const rowIdx = props.row.id;
-          console.log(props.row.original.nombre);
           return (
             <div>
               <span>
-                <EditServiceModalView data={props.row.original} />
+                <EditServiceModalView data={props.row.original} dis={dispatch} services={customServices}/>
+                <IconButton onClick={() => deleteService(props.row.original, services, dispatch)}><DeleteIcon style={{ fill: "#E00000" }} /></IconButton>
               </span>
-              <IconButton onClick={() => deleteService(props.row.original)} style={{}}><DeleteIcon /></IconButton>
             </div>
           );
         },
