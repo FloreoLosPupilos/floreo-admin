@@ -31,7 +31,7 @@ export const ModalEditLayout = ({ children, buttonText, modalTitle }) => {
 
   return (
     <>
-      <IconButton style={{}} onClick={handleOpen}><EditIcon/></IconButton>
+      <IconButton style={{}} onClick={handleOpen}><EditIcon style={{fill: "#FF811A"}}/></IconButton>
       <Modal
         open={open}
         onClose={handleClose}
