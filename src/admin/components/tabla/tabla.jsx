@@ -1,13 +1,12 @@
 import 'regenerator-runtime/runtime'
 import React, { useState, useMemo } from 'react';
+import { useSelector } from "react-redux";
 import "./styles.css";
 
+//Icons
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { IconButton } from '@mui/material';
-
-//Firebase
-import GetCollectionData from './getCollectionData';
 
 //Paginacion & Filtro
 import { useTable, usePagination, useGlobalFilter, useAsyncDebounce } from "react-table";
@@ -69,11 +68,19 @@ function getColumsData(collection, subcollection) {
   }
 }
 
-
 //Componente Tabla
 export const Tabla = (props) => {
-  //Constante con la coleccion solicitada.
-  const collections = GetCollectionData({collection: props.collection},props.subCollection);
+  let collection = [];
+  
+  if (props.subCollection) {
+    collection = useSelector(state => state.collections.customServices);
+  } else if (props.collection == "Categorias") {
+      collection = useSelector(state => state.collections.categories);
+  } else if (props.collection == "Integrantes") {
+    collection = useSelector(state => state.collections.members);
+  } else if (props.collection == "Suscriptores") {
+    collection = useSelector(state => state.collections.subscribers);
+  }
 
   //Columnas
   const columns = getColumsData(props.collection, props.subCollection);
@@ -82,7 +89,7 @@ export const Tabla = (props) => {
   //Datos de las filas
   const data = useMemo(
     () =>
-      collections
+      collection
   );
 
   const table = useTable(
