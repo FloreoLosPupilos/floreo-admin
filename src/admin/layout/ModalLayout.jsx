@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, Button, Modal, Typography, IconButton, Grid } from '@mui/material';
 import { HighlightOff, SaveOutlined } from '@mui/icons-material';
 
-export const ModalLayout = ({ children, buttonText, modalTitle }) => {
+export const ModalLayout = ({ children, buttonText, modalTitle, clearForm }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -23,6 +23,7 @@ export const ModalLayout = ({ children, buttonText, modalTitle }) => {
     if (reason && reason == "backdropClick") 
         return;
     closeModal();
+    clearForm();
   }
 
   window.addEventListener('closeModal', () => {

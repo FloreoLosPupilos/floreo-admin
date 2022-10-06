@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import Swal from 'sweetalert2';
 
 export const AddCategoryModalView = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const { isSaving, images } = useSelector(state => state.carrusel);
 
   const fileInputRef = useRef();
@@ -23,6 +23,7 @@ export const AddCategoryModalView = () => {
     if (!categoryImage) return
     const [pathStorage, url] = await fileUpload(categoryImage, 'category');
     setCollectionDataCustomId('Categorias', {  nombre: name, img: url  }, name)
+    reset()
 
     window.dispatchEvent(evt);
     Swal.fire('Categoria creada', 'Se guardo correctamente la categoria', 'success');
@@ -38,7 +39,7 @@ export const AddCategoryModalView = () => {
 
   return (
     <>
-      <ModalLayout buttonText='Agregar Categoría' modalTitle='Nueva Categoría'>
+      <ModalLayout buttonText='Agregar Categoría' modalTitle='Nueva Categoría' clearForm={reset}>
         <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster' id="form">
           <Grid container direction='row' justifyContent='end' alignItems='center' sx={{ mb: 1 }}>
             <Grid container>

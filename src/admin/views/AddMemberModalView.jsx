@@ -13,7 +13,7 @@ export const AddMemberModalView = () => {
   const imageRef = useRef();
   const textInput = useRef(null);
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const newUser = 'https://github.com/kwalsh15/floreo-admin/blob/main/src/assets/newUser.png?raw=true';
 
@@ -24,7 +24,7 @@ export const AddMemberModalView = () => {
     const [pathStorage, url] = await fileUpload(memberImage, 'members');
     setCollectionData('Integrantes', { nombre: name, contacto: email, telefono: phone, img: url })
     textInput.current.value = "";
-
+    reset()
 
     window.dispatchEvent(evt);
     Swal.fire('Integrante creado', 'Se guardo correctamente el nuevo integrante', 'success');
@@ -44,7 +44,7 @@ export const AddMemberModalView = () => {
 
   return (
     <>
-      <ModalLayout buttonText="Agregar Integrante" modalTitle={"Nuevo Integrante"}>
+      <ModalLayout buttonText="Agregar Integrante" modalTitle={"Nuevo Integrante"} clearForm={reset}>
         <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster' id="form">
           <Grid container direction='row' justifyContent='end' alignItems='center' sx={{ mb: 1 }}>
 
