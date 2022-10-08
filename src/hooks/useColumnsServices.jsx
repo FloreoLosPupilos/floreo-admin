@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { startLoadingCustomServices, startLoadingServices } from "../store/collections/thunks";
+import { deleteCustomServices, startLoadingCustomServices, startLoadingServices } from "../store/collections/thunks";
 import { useDispatch, useSelector } from "react-redux";
 
 //Firebase
@@ -23,9 +23,10 @@ function editService(id) {
 //Metodo para eliminar un servicio.
 const deleteService = (data, services, dispatch) => {
   const remove = async (id) => {
-    const categoryDoc = doc(FirebaseDB, "Servicios", id);
-    await deleteDoc(categoryDoc);
+    const serviceDoc = doc(FirebaseDB, "Servicios", id);
+    await deleteDoc(serviceDoc);
     dispatch(startLoadingServices());
+    dispatch(deleteCustomServices(data.id));
   }
   Swal.fire({
     title: '¿Está seguro de eliminar el servicio: ' + data.nombre + '?',
@@ -36,11 +37,6 @@ const deleteService = (data, services, dispatch) => {
     if (result.isConfirmed) {
       remove(data.id);
       Swal.fire('Servicio ' + data.nombre + ' eliminado correctamente', '', 'success');
-
-      const newServices = services.filter(object => {
-        return object.id != data.id;
-      });
-      dispatch(startLoadingCustomServices("", newServices))
     }
   })
 }
@@ -72,7 +68,7 @@ export const useColumnsServices = () => {
           return (
             <div>
               <span>
-                <EditServiceModalView data={props.row.original} dis={dispatch} services={customServices}/>
+                <EditServiceModalView data={props.row.original} dis={dispatch} services={customServices} />
                 <IconButton onClick={() => deleteService(props.row.original, services, dispatch)}><DeleteIcon style={{ fill: "#E00000" }} /></IconButton>
               </span>
             </div>
@@ -80,7 +76,7 @@ export const useColumnsServices = () => {
         },
       },
     ],
-    []
+    [services]
   );
 
   return columns;
