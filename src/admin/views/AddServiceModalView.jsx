@@ -1,21 +1,18 @@
 import { ModalLayout } from "../layout/ModalLayout";
 import { useForm } from "react-hook-form";
 import { Grid, TextField } from "@mui/material";
-import { setService } from "../../helpers";
-import {useLocation} from 'react-router-dom';
+import { setServicesData } from "../../helpers";
+import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-export const AddServiceModalView = () => {
+export const AddServiceModalView = (props) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
-
-  const location = useLocation();
 
   const evt = new CustomEvent("closeModal");
 
-  const onSubmit = async ({ name, information, price}) => {
-    setService('Categorias', { nombre: name, informacion: information, precio: price }, location.state.nombre)
-    reset()
-
+  const onSubmit = async ({ name, information, price }) => {
+    await setServicesData('Servicios', { nombre: name, informacion: information, precio: price, categoria: props.id }, props.dis)
+    reset();
     window.dispatchEvent(evt);
     Swal.fire('Servicio creado', 'Se guardo correctamente el nuevo servicio', 'success');
   }
