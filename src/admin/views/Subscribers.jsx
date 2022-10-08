@@ -5,13 +5,10 @@ import { AddCategoryModalView } from "./AddCategoryModalView";
 import { Title } from "./Title";
 
 export const SubscribersView = () => {
-  const dispatch = useDispatch();
-  dispatch(startLoadingCategories());
   return (
     <>
-      <Title title='Subscriptores' />
-      <AddCategoryModalView />
-      <Tabla collection="Categorias" subCollection={false} />
+      <Title title='Suscriptores' />
+      <Tabla collection="Suscriptores" subCollection={false} />
 
     </>
   );

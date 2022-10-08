@@ -4,12 +4,12 @@ export const useColumnsSubcribers = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "id",
-        accessor: "id",
+        Header: "Nombre",
+        accessor: "nombre",
       },
       {
-        Header: "Username",
-        accessor: "username",
+        Header: "Email",
+        accessor: "email",
       },
     ],
     []
