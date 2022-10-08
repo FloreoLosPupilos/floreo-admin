@@ -2,13 +2,13 @@ import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
 import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { fileUpload, setCollectionData } from "../../helpers";
+import { fileUpload, setMembersData } from "../../helpers";
 import { ModalLayout } from "../layout/ModalLayout";
 import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
 
-export const AddMemberModalView = () => {
+export const AddMemberModalView = (props) => {
   const fileInputRef = useRef();
   const imageRef = useRef();
   const textInput = useRef(null);
@@ -22,7 +22,7 @@ export const AddMemberModalView = () => {
   const onSubmit = async ({ name, email, phone }) => {
     if (!memberImage) return
     const [pathStorage, url] = await fileUpload(memberImage, 'members');
-    setCollectionData('Integrantes', { nombre: name, contacto: email, telefono: phone, img: url })
+    setMembersData('Integrantes', { nombre: name, contacto: email, telefono: phone, img: url },props.dis)
     textInput.current.value = "";
     reset()
 
