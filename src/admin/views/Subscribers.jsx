@@ -1,15 +1,18 @@
-import { useDispatch } from "react-redux";
-import { startLoadingCategories } from "../../store/collections/thunks";
-import { Tabla } from "../components/tabla/tabla";
-import { AddCategoryModalView } from "./AddCategoryModalView";
-import { Title } from "./Title";
+import { useDispatch } from 'react-redux';
+import { Tabla } from '../components/tabla/tabla';
+import { SendEmailView } from './SendEmailView';
+import { Title } from './Title';
 
 export const SubscribersView = () => {
+
+  const dispatch = useDispatch();
+
+
   return (
     <>
       <Title title='Suscriptores' />
+      <SendEmailView dis={dispatch} />
       <Tabla collection="Suscriptores" subCollection={false} />
-
     </>
   );
 }

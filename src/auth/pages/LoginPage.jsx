@@ -16,7 +16,6 @@ const formData = {
 export const LoginPage = () => {
   const dispatch = useDispatch();
   const { errorMessage } = useSelector(state => state.auth);
-  console.log(errorMessage,' login');
 
   const {email, password, onInputChange} = useForm(formData)
 

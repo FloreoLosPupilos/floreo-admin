@@ -8,7 +8,6 @@ import { useCheckAuth } from '../hooks';
 export const AppRouter = () => {
 
   const status = useCheckAuth();
-  console.log({status});
 
   return (
     <Routes>
