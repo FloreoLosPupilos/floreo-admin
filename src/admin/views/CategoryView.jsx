@@ -6,12 +6,11 @@ import { Title } from "./Title";
 
 export const CategoryView = () => {
   const dispatch = useDispatch();
-  dispatch(startLoadingCategories());
   return (
     <>
       <Title title='Categorías' />
-      <AddCategoryModalView />
-      <Tabla collection="Categorias" subCollection={false} />
+      <AddCategoryModalView dis={dispatch} />
+      <Tabla  collection="Categorias" subCollection={false} />
 
     </>
   );

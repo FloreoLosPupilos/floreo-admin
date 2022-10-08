@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { useSelector } from "react-redux";
 import Swal from 'sweetalert2';
 
-export const AddCategoryModalView = () => {
+export const AddCategoryModalView = (props) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const { isSaving, images } = useSelector(state => state.carrusel);
 
@@ -22,7 +22,7 @@ export const AddCategoryModalView = () => {
   const onSubmit = async ({ name }) => {
     if (!categoryImage) return
     const [pathStorage, url] = await fileUpload(categoryImage, 'category');
-    setCollectionDataCustomId('Categorias', {  nombre: name, img: url  }, name)
+    setCollectionDataCustomId('Categorias', {  nombre: name, img: url  }, name, props.dis)
     reset()
 
     window.dispatchEvent(evt);
