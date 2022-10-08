@@ -20,6 +20,12 @@ export const collectionSlice = createSlice({
         setCustomServices: (state, action) => {
             state.customServices = action.payload;
         },
+        addService: (state, action) => {
+            state.customServices.push(action.payload);
+        },
+        delteCustomService: (state, action) => {
+            state.customServices = state.customServices.filter(service => service.id !== action.payload);
+        },
         setMembers: (state, action) => {
             state.members = action.payload;
         },
@@ -34,6 +40,8 @@ export const {
     setCategories,
     setServices,
     setCustomServices,
+    addService,
+    delteCustomService,
     setMembers,
     setSubscribers
 } = collectionSlice.actions;
