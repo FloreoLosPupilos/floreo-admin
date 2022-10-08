@@ -1,11 +1,10 @@
 import { getCollectionData } from '../../helpers';
-import { setCategories, setCustomServices, setMembers, setServices, setSubscribers } from './collectionSlice';
+import { addService, delteCustomService, setCategories, setCustomServices, setMembers, setServices, setSubscribers } from './collectionSlice';
 
 
 export const startLoadingCategories = () => {
     return async (dispatch) => {
         const categories = await getCollectionData("Categorias");
-        console.log("Categorias", categories);
         dispatch(setCategories(categories));
     }
 };
@@ -13,7 +12,6 @@ export const startLoadingCategories = () => {
 export const startLoadingServices = () => {
     return async (dispatch) => {
         const services = await getCollectionData("Servicios");
-        console.log("Servicios", services);
         dispatch(setServices(services));
     }
 };
@@ -31,10 +29,21 @@ export const startLoadingCustomServices = (id, services) => {
     }
 };
 
+export const addCustomServices = (service) => {
+    return (dispatch) => {
+        dispatch(addService(service));
+    }
+};
+
+export const deleteCustomServices = (id) => {
+    return (dispatch) => {
+        dispatch(delteCustomService(id));
+    }
+};
+
 export const startLoadingMembers = () => {
     return async (dispatch) => {
         const members = await getCollectionData("Integrantes");
-        console.log("Integrantes", members);
         dispatch(setMembers(members));
     }
 };
@@ -42,7 +51,6 @@ export const startLoadingMembers = () => {
 export const startLoadingSubscribers = () => {
     return async (dispatch) => {
         const subscribers = await getCollectionData("Suscriptores");
-        console.log("Suscriptores", subscribers);
         dispatch(setSubscribers(subscribers));
     }
 };
