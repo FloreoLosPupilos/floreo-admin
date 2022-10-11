@@ -33,11 +33,6 @@ export const SendEmailView = () => {
       };
 
       emailjs.send('service_83ip87s', 'template_xohtm7j', contactParams  , 'pRpYCw5wd2vKrQNMB')
-      .then( (error) => {
-        Swal.fire('Falló al enviar el correo', error.text, 'error');
-
-      });
-      
     }
     reset()
     window.dispatchEvent(evt);
