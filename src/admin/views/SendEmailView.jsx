@@ -32,11 +32,24 @@ export const SendEmailView = () => {
         mensaje
       };
 
-      emailjs.send('service_83ip87s', 'template_xohtm7j', contactParams  , 'pRpYCw5wd2vKrQNMB')
+      emailjs.send('service_pvhs6qf', 'template_9ly46ds', contactParams, 'n1cKmebdl0-X4Ozh2')
+      .then((result) => {
+          Swal.fire({
+            title: 'Quiere enviar la noticia?',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            denyButtonText: `Cancelar`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              reset()
+              Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
+              window.dispatchEvent(evt);  
+            }
+          })
+      }, (error) => {
+          Swal.fire('Error', error.text, 'error');
+      });
     }
-    reset()
-    window.dispatchEvent(evt);
-    Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
 
   }
 
@@ -64,10 +77,6 @@ export const SendEmailView = () => {
                 {...register("mensaje", { required: true })}
               />
               {errors.mensaje && <span style={{ color: 'red' }}> Este campo es requerido</span>}
-
-              {
-
-              }
         
             </Grid>
           </Grid>
