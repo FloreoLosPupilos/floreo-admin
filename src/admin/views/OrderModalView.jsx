@@ -1,11 +1,11 @@
 import { ModalOrderLayout } from "../layout/ModalOrderLayout";
 import { Button, Card, CardContent, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import Swal from 'sweetalert2';
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { updateOrderState } from "../../helpers";
 
 
 export const OrderModalView = (props) => {
@@ -24,6 +24,7 @@ export const OrderModalView = (props) => {
   }
 
   const accpetOrder = async () => {
+
     Swal.fire({
       title: '¿Está seguro de aceptar este pedido?',
       showCancelButton: true,
@@ -32,6 +33,7 @@ export const OrderModalView = (props) => {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire('Este pedido se ha aceptado correctmente', '', 'success');
+        updateOrderState('Pedidos', props.data, 'aceptado', props.dis)
         window.dispatchEvent(evt);
       }
     })
@@ -45,6 +47,8 @@ export const OrderModalView = (props) => {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
+        props.data.estado = 'rechazado';
+        updateOrderState('Pedidos', props.data, 'rechazado', props.dis)
         Swal.fire('Este pedido se ha rechazado correctmente', '', 'success');
         window.dispatchEvent(evt);
 
@@ -134,33 +138,56 @@ export const OrderModalView = (props) => {
             ₡{props.data.total}
           </Typography>
         </div>
-        <div>
-          <Button onClick={() => accpetOrder()}
-            color='primary'
-            sx={{
-              fontSize: 14, float: 'right', marginLeft: '40px',
-              ':hover': {
-                bgcolor: '#90EE90', // theme.palette.primary.main
-                color: 'primary',
-              },
-            }}
-          >
-            <CheckCircleOutlineIcon sx={{ fontSize: 35, mr: 1, fill: 'green' }} />
-            Aceptar
-          </Button>
-          <Button onClick={() => rejectOrder()}
-            color='primary'
-            sx={{
-              fontSize: 14, float: 'right', borderRadius: '10px', border: 'black', ':hover': {
-                bgcolor: '#FFCCCB', // theme.palette.primary.main
-                color: 'primary',
+        {
+          (() => {
+            if (props.data.estado != 'rechazado' && props.data.estado != 'aceptado') {
+              return (
+                <div>
+                  <Button onClick={() => accpetOrder()}
+                    color='primary'
+                    sx={{
+                      fontSize: 14, float: 'right', marginLeft: '40px',
+                      ':hover': {
+                        bgcolor: '#90EE90', // theme.palette.primary.main
+                        color: 'primary',
+                      },
+                    }}
+                  >
+                    <CheckCircleOutlineIcon sx={{ fontSize: 35, mr: 1, fill: 'green' }} />
+                    Aceptar
+                  </Button>
+                  <Button onClick={() => rejectOrder()}
+                    color='primary'
+                    sx={{
+                      fontSize: 14, float: 'right', borderRadius: '10px', border: 'black', ':hover': {
+                        bgcolor: '#FFCCCB', // theme.palette.primary.main
+                        color: 'primary',
+                      }
+                    }}
+                  >
+                    <HighlightOffIcon sx={{ fontSize: 35, mr: 1, fill: 'red' }} />
+                    Rechazar
+                  </Button>
+                </div>
+              )
+            } else {
+
+              if (props.data.estado == 'rechazado') {
+                return (<div>
+                  <Typography display="inline" sx={{ color: 'red', float: 'right', fontSize: 28, fontWeight: '999' }} color="text.primary" gutterBottom>
+                    Rechazado
+                  </Typography>
+                </div>)
+              } else {
+                return (<div>
+                  <Typography display="inline" sx={{ color: 'green', float: 'right', fontSize: 28, fontWeight: '999' }} color="text.primary" gutterBottom>
+                    Aceptado
+                  </Typography>
+                </div>)
               }
-            }}
-          >
-            <HighlightOffIcon sx={{ fontSize: 35, mr: 1, fill: 'red' }} />
-            Rechazar
-          </Button>
-        </div>
+            }
+          })()
+        }
       </ModalOrderLayout>
     </>
   );

@@ -29,14 +29,9 @@ function editCategory(id) {
 
 export const useColumnsOrders = () => {
   const dispatch = useDispatch();
-  const services = useSelector(state => state.collections.services);
 
   const columns = useMemo(
     () => [
-      {
-        Header: "ID",
-        accessor: "id",
-      },
       {
         Header: "Cliente",
         accessor: "nombre",
@@ -81,7 +76,7 @@ export const useColumnsOrders = () => {
           return (
             <div>
               <span>
-                <OrderModalView data={props.row.original} />
+                <OrderModalView data={props.row.original} dis={dispatch} />
               </span>
             </div>
           );
