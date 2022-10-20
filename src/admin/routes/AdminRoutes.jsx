@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { AboutPage, CarrouselPage, ServicePage, CategoryPage, MemberPage } from '../pages';
+import { AboutPage, CarrouselPage, ServicePage, CategoryPage, MemberPage, OrderPage } from '../pages';
 import { SubscribersPage } from '../pages/SubscribersPage';
 import { NavBar } from '../ui/Navbar';
 
@@ -16,7 +16,7 @@ export const AdminRoutes = () => {
                 <Route path="/categoria" element={<CategoryPage />} />
                 <Route path="/integrantes" element={<MemberPage />} />
                 <Route path="/subscriptores" element={<SubscribersPage />} />
-
+                <Route path="/pedidos" element={<OrderPage />} />
                 <Route path="/*" element={<Navigate to="/" />} />
             </Routes>
         </>

@@ -12,7 +12,7 @@ import { IconButton } from '@mui/material';
 import { useTable, usePagination, useGlobalFilter, useAsyncDebounce } from "react-table";
 
 //Componentes que retornan la informacion de las columnas
-import { useColumnsCategories, useColumnsMembers, useColumnsServices, useColumnsSubcribers } from '../../../hooks';
+import { useColumnsCategories, useColumnsMembers, useColumnsServices, useColumnsSubcribers, useColumnsOrders } from '../../../hooks';
 
 
 
@@ -63,6 +63,8 @@ function getColumsData(collection, subcollection) {
     return (useColumnsMembers());
   } else if (collection == "Suscriptores") {
     return (useColumnsSubcribers());
+  } else if (collection == "Pedidos") {
+    return (useColumnsOrders());
   } else {
     return ("Error");
   }
@@ -71,15 +73,17 @@ function getColumsData(collection, subcollection) {
 //Componente Tabla
 export const Tabla = (props) => {
   let collection = [];
-  
+
   if (props.subCollection) {
     collection = useSelector(state => state.collections.customServices);
   } else if (props.collection == "Categorias") {
-      collection = useSelector(state => state.collections.categories);
+    collection = useSelector(state => state.collections.categories);
   } else if (props.collection == "Integrantes") {
     collection = useSelector(state => state.collections.members);
   } else if (props.collection == "Suscriptores") {
     collection = useSelector(state => state.collections.subscribers);
+  } else if (props.collection == "Pedidos") {
+    collection = useSelector(state => state.collections.orders);
   }
 
   //Columnas

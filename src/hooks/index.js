@@ -4,3 +4,4 @@ export * from './useColumnsCategories';
 export * from './useColumnsMembers';
 export * from './useColumnsServices';
 export * from './useColumnsSubcribers';
+export * from './useColumnsOrders';
