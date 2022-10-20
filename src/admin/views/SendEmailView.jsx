@@ -32,23 +32,23 @@ export const SendEmailView = () => {
         mensaje
       };
 
-      emailjs.send('service_pvhs6qf', 'template_9ly46ds', contactParams, 'n1cKmebdl0-X4Ozh2')
-      .then((result) => {
-          Swal.fire({
-            title: 'Quiere enviar la noticia?',
-            showCancelButton: true,
-            confirmButtonText: 'Aceptar',
-            denyButtonText: `Cancelar`,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              reset()
-              Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
-              window.dispatchEvent(evt);  
-            }
+      Swal.fire({
+        title: 'Quiere enviar la noticia?',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        denyButtonText: `Cancelar`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          emailjs.send('service_pvhs6qf', 'template_9ly46ds', contactParams, 'n1cKmebdl0-X4Ozh2')
+          .then(error => {
+            console.log(error);
           })
-      }, (error) => {
-          Swal.fire('Error', error.text, 'error');
-      });
+          reset()
+          Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
+          window.dispatchEvent(evt);  
+        } 
+      })
+
     }
 
   }
