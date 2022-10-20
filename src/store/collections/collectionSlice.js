@@ -8,7 +8,8 @@ export const collectionSlice = createSlice({
         services: [],
         customServices: [],
         members: [],
-        subscribers: []
+        subscribers: [],
+        orders: []
     },
     reducers: {
         setCategories: (state, action) => {
@@ -31,6 +32,9 @@ export const collectionSlice = createSlice({
         },
         setSubscribers: (state, action) => {
             state.subscribers = action.payload;
+        },
+        setOrders: (state, action) => {
+            state.orders = action.payload;
         }
 
     }
@@ -43,5 +47,6 @@ export const {
     addService,
     delteCustomService,
     setMembers,
-    setSubscribers
+    setSubscribers,
+    setOrders
 } = collectionSlice.actions;

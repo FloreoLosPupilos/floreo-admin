@@ -6,15 +6,15 @@ import { onAuthStateChanged } from '@firebase/auth';
 import { login, logout } from '../auth';
 import { clearImagesLogout, startLoadingImages } from '../store/carrusel';
 import { startLoadingSection } from '../store/about';
-import { startLoadingCategories, startLoadingMembers, startLoadingServices, startLoadingSubscribers } from '../store/collections/thunks';
+import { startLoadingCategories, startLoadingMembers, startLoadingOrders, startLoadingServices, startLoadingSubscribers } from '../store/collections/thunks';
 
 export const useCheckAuth = () => {
   const { status } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(FirebaseAuth, async(user) => {
-      if(!user) {
+    onAuthStateChanged(FirebaseAuth, async (user) => {
+      if (!user) {
         return dispatch(logout())
       }
       const { displayName, email, uid } = user;
@@ -25,6 +25,7 @@ export const useCheckAuth = () => {
       dispatch(startLoadingServices())
       dispatch(startLoadingMembers())
       dispatch(startLoadingSubscribers())
+      dispatch(startLoadingOrders())
     });
   }, []);
   return status;

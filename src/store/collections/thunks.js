@@ -1,5 +1,5 @@
 import { getCollectionData } from '../../helpers';
-import { addService, delteCustomService, setCategories, setCustomServices, setMembers, setServices, setSubscribers } from './collectionSlice';
+import { addService, delteCustomService, setCategories, setCustomServices, setMembers, setOrders, setServices, setSubscribers } from './collectionSlice';
 
 
 export const startLoadingCategories = () => {
@@ -54,4 +54,12 @@ export const startLoadingSubscribers = () => {
         dispatch(setSubscribers(subscribers));
     }
 };
+
+export const startLoadingOrders = () => {
+    return async (dispatch) => {
+        const orders = await getCollectionData("Pedidos");
+        dispatch(setOrders(orders));
+    }
+};
+
 
