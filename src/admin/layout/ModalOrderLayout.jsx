@@ -75,7 +75,7 @@ export const ModalOrderLayout = ({ children, modalTitle }) => {
           <Typography sx={{ fontSize: '14' }} display="inline" id="modal-modal-title" variant="h6" component="h2">
             {modalTitle}
           </Typography>
-          <div style={{ position: 'sticky', top: 0, float: 'right' }}>
+          <div style={{ zIndex:900,position: 'sticky', top: 0, float: 'right' }}>
             <IconButton onClick={handleClose}>
               <HighlightOff sx={{ fontSize: 35 }} />
             </IconButton>
