@@ -47,7 +47,7 @@ export const UnsubscribeView = () => {
 
               <Box sx={{ textAlign: 'center' }}>
                 <Typography sx={{ fontSize: 20, fontWeight: 'bold' }} color="text.primary" gutterBottom>
-                  ¿Deseas dejar de recibir noticias de Floreo Pupilos al siguiente correo: {email}
+                  ¿Deseas dejar de recibir noticias de Floreo Pupilos al siguiente correo: {email}?
                 </Typography>
               </Box>
 
