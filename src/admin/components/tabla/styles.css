@@ -19,7 +19,8 @@ thead{
   
 }
 
-.colums{
+.columns{
+  width: 200px;
   background-color: #262254;
   border-top: 1.5px solid rgb(180, 180, 180); ;
   color: rgb(255, 255, 255);
@@ -27,6 +28,7 @@ thead{
 
 .search
 {
+  margin-bottom: 3.5px;
   position: sticky;
   top: 0px;
   padding: 0px 0px 10px 0px;
@@ -40,7 +42,6 @@ thead{
   background-color: white;
   width:40%;
 }
-
 
 table tr:first-child {
   border-top: none;
@@ -68,7 +69,6 @@ table td {
 
 td div {
   white-space: nowrap; 
-  width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -112,11 +112,15 @@ table td {
     position: sticky;
     bottom: 0;
     margin-top: 1.5rem;
-    display: flex;
     justify-content: space-between;
     padding: .25em .5em;
+    width: 100%;
   }
-  
+
+  #paginationbutton{
+    font-size: 1.5vh;
+  }
+
   .page-controller {
     width: 20px;
     height: 17px;
@@ -126,8 +130,7 @@ table td {
   select {
     border: 1.5px solid #000000;
     border-radius: 10px;
-    width: fit-content;
-    height: fit-content;
+    height: 100%;
     
   }
 }
@@ -180,6 +183,10 @@ table td {
     height: 10%;
   }
   
+  #paginationbutton{
+    font-size: 3.5vh;
+  }
+
   .page-controller {
     width: 90px;
     height: 11px;
@@ -188,6 +195,7 @@ table td {
   select {
     border: 1.5px solid #000000;
     border-radius: 10px;
+    height: 100%;
   }
   
 }
