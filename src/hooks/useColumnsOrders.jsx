@@ -1,31 +1,11 @@
 import { useMemo } from "react";
-import { Link } from 'react-router-dom';
-
-//Firebase
-import { deleteDoc, doc, collection, getDocs } from "firebase/firestore/lite";
-import { FirebaseDB } from "../firebase/config";
+import { useDispatch } from "react-redux";
 
 //Modal de editar
 import { OrderModalView } from "../admin/views/OrderModalView";
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 
 //Dialog
-import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
-import { IconButton } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { startLoadingCategories, startLoadingCustomServices } from "../store/collections/thunks";
-
-
-//Metodo para ver los pedidos.
-function viewOrders(id, services, dispatch) {
-}
-
-//Metodo para editar una categoria.
-function editCategory(id) {
-  console.log("Editar", id);
-}
-
 
 export const useColumnsOrders = () => {
   const dispatch = useDispatch();
@@ -39,6 +19,10 @@ export const useColumnsOrders = () => {
       {
         Header: "Teléfono",
         accessor: "telefono",
+      },
+      {
+        Header: "Fecha De Evento",
+        accessor: "fecha",
       },
       {
         Header: "Estado",
