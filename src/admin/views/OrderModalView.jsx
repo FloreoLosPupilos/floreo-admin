@@ -6,26 +6,19 @@ import 'leaflet/dist/leaflet.css';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { updateOrderState } from "../../helpers";
-
+import '../views/styles.css'
 
 export const OrderModalView = (props) => {
   const position = props.data.ubicacion;
 
   const evt = new CustomEvent("closeModal");
 
-  function servicesList() {
-    return (
-      <ol>
-        {props.data.servicios.map(service => (
-          <li key={service}>{service}</li>
-        ))}
-      </ol>
-    );
-  }
-
   const accpetOrder = async () => {
-
     Swal.fire({
+      customClass: {
+        container: 'my-swal',
+
+      },
       title: '¿Está seguro de aceptar este pedido?',
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
@@ -45,10 +38,11 @@ export const OrderModalView = (props) => {
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
       denyButtonText: `Cancelar`,
+
     }).then((result) => {
       if (result.isConfirmed) {
-        props.data.estado = 'rechazado';
-        updateOrderState('Pedidos', props.data, 'rechazado', props.dis)
+        target: document.getElementById('MuiBox-root css-dno1e2'),
+          updateOrderState('Pedidos', props.data, 'rechazado', props.dis)
         Swal.fire('Este pedido se ha rechazado correctmente', '', 'success');
         window.dispatchEvent(evt);
 
@@ -89,7 +83,7 @@ export const OrderModalView = (props) => {
             />
             <Marker position={position}>
               <Popup >
-                Ubiccaión
+                Ubicación
               </Popup>
             </Marker>
           </MapContainer>
@@ -121,9 +115,11 @@ export const OrderModalView = (props) => {
               </Typography>
 
 
-              {
-                servicesList()
-              }
+              <ol>
+                {props.data.servicios.map((service, index) => (
+                  <li key={index}>{service}</li>
+                ))}
+              </ol>
 
 
             </CardContent>
