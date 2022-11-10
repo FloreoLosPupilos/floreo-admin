@@ -23,6 +23,7 @@ export const SendEmailView = () => {
   const onSubmit = async ({mensaje}) => {
     
     for (const usuario of subscribers) {
+      console.log("ENTRAA");
       let email = usuario.email;
       let name = usuario.nombre;
 
@@ -39,13 +40,16 @@ export const SendEmailView = () => {
         denyButtonText: `Cancelar`,
       }).then((result) => {
         if (result.isConfirmed) {
-          emailjs.send('service_pvhs6qf', 'template_9ly46ds', contactParams, 'n1cKmebdl0-X4Ozh2')
-          .then(error => {
+          emailjs.send('service_tl4y7x1', 'template_xohtm7j', contactParams, 'IkPc0rhAMN8c_tfBB')
+          .then((result) => {
+            console.log("Hola")
+            console.log(result.text);
+            reset()
+            Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
+            window.dispatchEvent(evt);  
+          }, (error) => {
             console.log(error);
           })
-          reset()
-          Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
-          window.dispatchEvent(evt);  
         } 
       })
 
@@ -57,7 +61,7 @@ export const SendEmailView = () => {
 
   return (
     <>
-      <ModalLayout buttonText="Enviar correo" modalTitle={"Nuevo correo electrónico"} clearForm={reset}>
+      <ModalLayout buttonText="Enviar correo" modalTitle={"Nuevo correo electrónico"} clearForm={reset}  mensaje="Enviar">
         <form onSubmit={handleSubmit(onSubmit)} className='animate__animated animate__fadeIn animate__faster' id="form">
           <Grid container direction='row' justifyContent='end' alignItems='center' sx={{ mb: 1 }}>
 

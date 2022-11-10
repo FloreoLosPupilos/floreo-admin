@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, Button, Modal, Typography, IconButton, Grid } from '@mui/material';
 import { HighlightOff, SaveOutlined } from '@mui/icons-material';
 
-export const ModalLayout = ({ children, buttonText, modalTitle, clearForm }) => {
+export const ModalLayout = ({ children, buttonText, modalTitle, clearForm, mensaje = 'Guardar' }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -56,7 +56,7 @@ export const ModalLayout = ({ children, buttonText, modalTitle, clearForm }) => 
               sx={{ padding: 2 }}
             >
               <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
-                    Guardar
+                    { mensaje }
                 </Button>
           </Grid>
         </Box>
