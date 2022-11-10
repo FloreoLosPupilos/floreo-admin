@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { startLogout } from '../../auth';
 import { Avatar, Tooltip } from '@mui/material';
 
-const pages = ['carrusel', 'nosotros', 'categoria', 'integrantes', 'subscriptores','pedidos'];
+const pages = ['carrusel', 'nosotros', 'categoria', 'integrantes', 'suscriptores','pedidos'];
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
