@@ -21,6 +21,7 @@ export const UnsubscribeView = () => {
 
   const removeSubscriber = async () => {
     const emailId = getEmailId(email);
+    console.log("ID: ", emailId);
     Swal.fire('Subscripción eliminada', 'Se ha eliminado tu correo', 'success');
     const memberDoc = doc(FirebaseDB, "Suscriptores", emailId);
     await deleteDoc(memberDoc)
