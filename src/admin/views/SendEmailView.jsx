@@ -21,39 +21,40 @@ export const SendEmailView = () => {
   const evt = new CustomEvent("closeModal");
 
   const onSubmit = async ({mensaje}) => {
+
+    Swal.fire({
+      title: 'Quiere enviar la noticia?',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        window.dispatchEvent(evt);
+        reset()
+        
+        for (const usuario of subscribers) {
+          let email = usuario.email;
+          let name = usuario.nombre;
     
-    for (const usuario of subscribers) {
-      console.log("ENTRAA");
-      let email = usuario.email;
-      let name = usuario.nombre;
-
-      let contactParams = {
-        email,
-        name,
-        mensaje
-      };
-
-      Swal.fire({
-        title: 'Quiere enviar la noticia?',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar',
-        denyButtonText: `Cancelar`,
-      }).then((result) => {
-        if (result.isConfirmed) {
+          let contactParams = {
+            email,
+            name,
+            mensaje
+          };
+    
           emailjs.send('service_tl4y7x1', 'template_xohtm7j', contactParams, 'IkPc0rhAMN8c_tfBB')
           .then((result) => {
-            console.log("Hola")
-            console.log(result.text);
-            reset()
-            Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
-            window.dispatchEvent(evt);  
+            // Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
           }, (error) => {
-            console.log(error);
+            Swal.fire('Error', 'No se envió el correo de manera correcta', 'error');
+            console.log(error); 
           })
-        } 
-      })
-
-    }
+        }
+        Swal.fire('Enviar correo', 'Se envió el correo de manera correcta', 'success');
+      } 
+    })
+    
 
   }
 
