@@ -121,7 +121,9 @@ export const OrderModalView = (props) => {
                 ))}
               </ol>
 
-
+              <Typography sx={{ fontWeight: '999', float: 'right' }} display="inline">
+                Método de pago: {props.data.pago}
+              </Typography>
             </CardContent>
           </Card>
         </div>
