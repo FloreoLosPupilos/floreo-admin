@@ -3,7 +3,7 @@ import { doc, collection, setDoc, updateDoc } from 'firebase/firestore/lite';
 import { addCustomServices, startLoadingCategories, startLoadingMembers, startLoadingOrders, startLoadingServices } from '../store/collections/thunks';
 
 export const setCollectionDataCustomId = async (collectionName, data, id, dis) => {
-  const newDoc = doc(collection(FirebaseDB, collectionName), id);
+  const newDoc = doc(collection(FirebaseDB, collectionName));
   await setDoc(newDoc, data);
   dis(startLoadingCategories());
 }
