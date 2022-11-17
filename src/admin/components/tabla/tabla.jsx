@@ -72,7 +72,7 @@ function Filter({ globalFilter, setGlobalFilter, props }) {
                     }}
 
                   >
-                    <MenuItem value=" ">Ninguno</MenuItem>
+                    <MenuItem value="">Ninguno</MenuItem>
                     <MenuItem value="Pendiente">Pendientes</MenuItem>
                     <MenuItem value="Aceptado">Aceptados</MenuItem>
                     <MenuItem value="Rechazado">Rechazados</MenuItem>
@@ -221,13 +221,11 @@ export const Tabla = (props) => {
                         return (
                           <td data={cell.column.Header} {...cell.getCellProps()}>
 
-                            <div>
                               {
 
                                 // Render the cell contents
                                 cell.render("Cell")
                               }
-                            </div>
                             {imgDataLoader(cell)}
 
                           </td>
@@ -243,7 +241,6 @@ export const Tabla = (props) => {
         {
           (() => {
             if (collection.length == 0) {
-              console.log(props)
               return (
                 <div style={{
                   display: 'flex',
