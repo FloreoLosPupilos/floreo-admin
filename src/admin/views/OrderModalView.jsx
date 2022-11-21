@@ -1,14 +1,26 @@
 import { ModalOrderLayout } from "../layout/ModalOrderLayout";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 import Swal from 'sweetalert2';
+
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
+import L from "leaflet";
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { updateOrderState } from "../../helpers";
 import '../views/styles.css'
 
 export const OrderModalView = (props) => {
+  let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+  });
+
+  L.Marker.prototype.options.icon = DefaultIcon;
+
   const position = props.data.ubicacion;
 
   const evt = new CustomEvent("closeModal");
